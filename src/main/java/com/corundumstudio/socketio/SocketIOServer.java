@@ -15,24 +15,23 @@
  */
 package com.corundumstudio.socketio;
 
-import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
-
-import java.net.InetSocketAddress;
-import java.util.Collection;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.corundumstudio.socketio.listener.ClientListeners;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
 import com.corundumstudio.socketio.listener.DisconnectListener;
 import com.corundumstudio.socketio.namespace.Namespace;
 import com.corundumstudio.socketio.namespace.NamespacesHub;
+import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.net.InetSocketAddress;
+import java.util.Collection;
 
 public class SocketIOServer implements ClientListeners {
 
@@ -92,25 +91,23 @@ public class SocketIOServer implements ClientListeners {
     /**
      * Start server
      */
-    public void start() {
+    public void start(final ChannelFutureListener disconnectListener) throws InterruptedException {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
         pipelineFactory.start(configCopy, namespacesHub);
         ServerBootstrap b = new ServerBootstrap();
         b.group(bossGroup, workerGroup)
-            .option(ChannelOption.TCP_NODELAY, true)
-            .option(ChannelOption.SO_KEEPALIVE, true)
-            .channel(NioServerSocketChannel.class)
-            .childHandler(pipelineFactory);
+                .option(ChannelOption.TCP_NODELAY, true)
+                .option(ChannelOption.SO_KEEPALIVE, true)
+                .channel(NioServerSocketChannel.class)
+                .childHandler(pipelineFactory);
 
         InetSocketAddress addr = new InetSocketAddress(configCopy.getPort());
         if (configCopy.getHostname() != null) {
             addr = new InetSocketAddress(configCopy.getHostname(), configCopy.getPort());
         }
-
-        b.bind(addr).syncUninterruptibly();
-        log.info("SocketIO server started at port: {}", configCopy.getPort());
+        b.bind(addr).sync().channel().closeFuture().sync().addListener(disconnectListener);
     }
 
     /**
