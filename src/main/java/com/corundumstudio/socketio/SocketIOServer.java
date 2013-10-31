@@ -91,10 +91,8 @@ public class SocketIOServer implements ClientListeners {
     /**
      * Start server
      */
-    public void start(final ChannelFutureListener disconnectListener) throws InterruptedException {
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
-
+    public void start() {
+        initGroups();
         pipelineFactory.start(configCopy, namespacesHub);
         ServerBootstrap b = new ServerBootstrap();
         b.group(bossGroup, workerGroup)
@@ -108,6 +106,11 @@ public class SocketIOServer implements ClientListeners {
             addr = new InetSocketAddress(configCopy.getHostname(), configCopy.getPort());
         }
         b.bind(addr).sync().channel().closeFuture().sync().addListener(disconnectListener);
+    }
+
+    protected void initGroups() {
+        bossGroup = new NioEventLoopGroup(configCopy.getBossThreads());
+        workerGroup = new NioEventLoopGroup(configCopy.getWorkerThreads());
     }
 
     /**
