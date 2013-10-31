@@ -8,6 +8,9 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.2.2/jackson-databind-2.2.2-sources.jar!/" />
+      <root url="file://$PROJECT_DIR$/../jackson-databind/target/generated-sources" />
+      <root url="file://$PROJECT_DIR$/../jackson-databind/src/main/java" />
+      <root url="file://$PROJECT_DIR$/../jackson-databind/src/test/java" />
     </SOURCES>
   </library>
 </component>

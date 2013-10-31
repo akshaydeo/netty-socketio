@@ -91,7 +91,7 @@ public class SocketIOServer implements ClientListeners {
     /**
      * Start server
      */
-    public void start() {
+    public void start(final ChannelFutureListener disconnectListener) throws InterruptedException{
         initGroups();
         pipelineFactory.start(configCopy, namespacesHub);
         ServerBootstrap b = new ServerBootstrap();
