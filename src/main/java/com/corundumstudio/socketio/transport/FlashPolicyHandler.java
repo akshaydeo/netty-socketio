@@ -27,25 +27,25 @@ import io.netty.util.CharsetUtil;
 @Sharable
 public class FlashPolicyHandler extends ChannelInboundHandlerAdapter {
 
-    private final ByteBuf requestBuffer = Unpooled.unreleasableBuffer(Unpooled.copiedBuffer(
-                            "<policy-file-request/>", CharsetUtil.UTF_8));
+    private final ByteBuf requestBuffer = Unpooled.copiedBuffer(
+            "<policy-file-request/>", CharsetUtil.UTF_8);
 
-    private final ByteBuf responseBuffer = Unpooled.unreleasableBuffer(Unpooled.copiedBuffer(
-                            "<?xml version=\"1.0\"?>"
-                            + "<!DOCTYPE cross-domain-policy SYSTEM \"/xml/dtds/cross-domain-policy.dtd\">"
-                            + "<cross-domain-policy> "
-                            + "   <site-control permitted-cross-domain-policies=\"master-only\"/>"
-                            + "   <allow-access-from domain=\"*\" to-ports=\"*\" />"
-                            + "</cross-domain-policy>", CharsetUtil.UTF_8));
+    private final ByteBuf responseBuffer = Unpooled.copiedBuffer(
+            "<?xml version=\"1.0\"?>"
+                    + "<!DOCTYPE cross-domain-policy SYSTEM \"/xml/dtds/cross-domain-policy.dtd\">"
+                    + "<cross-domain-policy> "
+                    + "   <site-control permitted-cross-domain-policies=\"master-only\"/>"
+                    + "   <allow-access-from domain=\"*\" to-ports=\"*\" />"
+                    + "</cross-domain-policy>", CharsetUtil.UTF_8);
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead (ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof ByteBuf) {
             ByteBuf message = (ByteBuf) msg;
             ByteBuf data = message.slice(0, requestBuffer.readableBytes());
             if (data.equals(requestBuffer)) {
                 message.release();
-                ChannelFuture f = ctx.writeAndFlush(responseBuffer);
+                ChannelFuture f = ctx.writeAndFlush(Unpooled.wrappedBuffer(responseBuffer).retain());
                 f.addListener(ChannelFutureListener.CLOSE);
                 return;
             }
