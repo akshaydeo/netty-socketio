@@ -15,27 +15,6 @@
  */
 package com.corundumstudio.socketio.transport;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandler.Sharable;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.http.FullHttpRequest;
-import io.netty.handler.codec.http.HttpHeaders;
-import io.netty.handler.codec.http.HttpMethod;
-import io.netty.handler.codec.http.QueryStringDecoder;
-
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.DisconnectableHub;
 import com.corundumstudio.socketio.SocketIOClient;
@@ -52,6 +31,25 @@ import com.corundumstudio.socketio.parser.PacketType;
 import com.corundumstudio.socketio.scheduler.CancelableScheduler;
 import com.corundumstudio.socketio.scheduler.SchedulerKey;
 import com.corundumstudio.socketio.scheduler.SchedulerKey.Type;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelHandler.Sharable;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.HttpHeaders;
+import io.netty.handler.codec.http.HttpMethod;
+import io.netty.handler.codec.http.QueryStringDecoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 @Sharable
 public class XHRPollingTransport extends BaseTransport {
@@ -61,7 +59,7 @@ public class XHRPollingTransport extends BaseTransport {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final Map<UUID, XHRPollingClient> sessionId2Client =
-                                                    new ConcurrentHashMap<UUID, XHRPollingClient>();
+            new ConcurrentHashMap<UUID, XHRPollingClient>();
     private final CancelableScheduler scheduler;
 
     private final AckManager ackManager;
@@ -70,8 +68,9 @@ public class XHRPollingTransport extends BaseTransport {
     private final Configuration configuration;
     private final String path;
 
-    public XHRPollingTransport(String connectPath, AckManager ackManager, DisconnectableHub disconnectable, CancelableScheduler scheduler,
-                                AuthorizeHandler authorizeHandler, Configuration configuration) {
+    public XHRPollingTransport (String connectPath, AckManager ackManager,
+            DisconnectableHub disconnectable, CancelableScheduler scheduler,
+            AuthorizeHandler authorizeHandler, Configuration configuration) {
         this.path = connectPath + NAME + "/";
         this.ackManager = ackManager;
         this.authorizeHandler = authorizeHandler;
@@ -81,7 +80,8 @@ public class XHRPollingTransport extends BaseTransport {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead (ChannelHandlerContext ctx, Object msg) throws Exception {
+        log.trace("inside xhr polling transport");
         if (msg instanceof FullHttpRequest) {
             FullHttpRequest req = (FullHttpRequest) msg;
             QueryStringDecoder queryDecoder = new QueryStringDecoder(req.getUri());
@@ -98,8 +98,9 @@ public class XHRPollingTransport extends BaseTransport {
         ctx.fireChannelRead(msg);
     }
 
-    private void handleMessage(FullHttpRequest req, QueryStringDecoder queryDecoder, ChannelHandlerContext ctx)
-                                                                                throws IOException {
+    private void handleMessage (FullHttpRequest req, QueryStringDecoder queryDecoder,
+            ChannelHandlerContext ctx)
+            throws IOException {
         String[] parts = queryDecoder.path().split("/");
         if (parts.length > 3) {
             UUID sessionId = UUID.fromString(parts[4]);
@@ -116,17 +117,17 @@ public class XHRPollingTransport extends BaseTransport {
             }
         } else {
             log.warn("Wrong {} method request path: {}, from ip: {}. Channel closed!",
-                        req.getMethod(), path, ctx.channel().remoteAddress());
+                    req.getMethod(), path, ctx.channel().remoteAddress());
             ctx.channel().close();
         }
     }
 
-    private void scheduleNoop(final UUID sessionId) {
+    private void scheduleNoop (final UUID sessionId) {
         SchedulerKey key = new SchedulerKey(Type.POLLING, sessionId);
         scheduler.cancel(key);
         scheduler.schedule(key, new Runnable() {
             @Override
-            public void run() {
+            public void run () {
                 XHRPollingClient client = sessionId2Client.get(sessionId);
                 if (client != null) {
                     client.send(new Packet(PacketType.NOOP));
@@ -135,16 +136,16 @@ public class XHRPollingTransport extends BaseTransport {
         }, configuration.getPollingDuration(), TimeUnit.SECONDS);
     }
 
-    private void scheduleDisconnect(Channel channel, final UUID sessionId) {
+    private void scheduleDisconnect (Channel channel, final UUID sessionId) {
         final SchedulerKey key = new SchedulerKey(Type.CLOSE_TIMEOUT, sessionId);
         scheduler.cancel(key);
         ChannelFuture future = channel.closeFuture();
         future.addListener(new ChannelFutureListener() {
             @Override
-            public void operationComplete(ChannelFuture future) throws Exception {
+            public void operationComplete (ChannelFuture future) throws Exception {
                 scheduler.schedule(key, new Runnable() {
                     @Override
-                    public void run() {
+                    public void run () {
                         XHRPollingClient client = sessionId2Client.get(sessionId);
                         if (client != null) {
                             client.onChannelDisconnect();
@@ -156,8 +157,8 @@ public class XHRPollingTransport extends BaseTransport {
         });
     }
 
-    private void onPost(UUID sessionId, ChannelHandlerContext ctx, String origin, ByteBuf content)
-                                                                                throws IOException {
+    private void onPost (UUID sessionId, ChannelHandlerContext ctx, String origin, ByteBuf content)
+            throws IOException {
         XHRPollingClient client = sessionId2Client.get(sessionId);
         if (client == null) {
             log.debug("Client with sessionId: {} was already disconnected. Channel closed!", sessionId);
@@ -170,8 +171,9 @@ public class XHRPollingTransport extends BaseTransport {
         ctx.pipeline().fireChannelRead(new PacketsMessage(client, content));
     }
 
-    private void onGet(UUID sessionId, ChannelHandlerContext ctx, String origin) {
+    private void onGet (UUID sessionId, ChannelHandlerContext ctx, String origin) {
         if (!authorizeHandler.isSessionAuthorized(sessionId)) {
+            log.trace("Session is not authorized");
             sendError(ctx, origin, sessionId);
             return;
         }
@@ -187,8 +189,9 @@ public class XHRPollingTransport extends BaseTransport {
         scheduleNoop(sessionId);
     }
 
-    private XHRPollingClient createClient(String origin, Channel channel, UUID sessionId) {
-        XHRPollingClient client = new XHRPollingClient(ackManager, disconnectable, sessionId, Transport.XHRPOLLING);
+    private XHRPollingClient createClient (String origin, Channel channel, UUID sessionId) {
+        XHRPollingClient client = new XHRPollingClient(ackManager, disconnectable, sessionId,
+                Transport.XHRPOLLING);
 
         sessionId2Client.put(sessionId, client);
         client.bindChannel(channel, origin);
@@ -198,7 +201,7 @@ public class XHRPollingTransport extends BaseTransport {
         return client;
     }
 
-    private void sendError(ChannelHandlerContext ctx, String origin, UUID sessionId) {
+    private void sendError (ChannelHandlerContext ctx, String origin, UUID sessionId) {
         log.debug("Client with sessionId: {} was not found! Reconnect error response sended", sessionId);
         Packet packet = new Packet(PacketType.ERROR);
         packet.setReason(ErrorReason.CLIENT_NOT_HANDSHAKEN);
@@ -207,7 +210,7 @@ public class XHRPollingTransport extends BaseTransport {
     }
 
     @Override
-    public void onDisconnect(BaseClient client) {
+    public void onDisconnect (BaseClient client) {
         if (client instanceof XHRPollingClient) {
             UUID sessionId = client.getSessionId();
 
@@ -219,7 +222,7 @@ public class XHRPollingTransport extends BaseTransport {
         }
     }
 
-    public Iterable<SocketIOClient> getAllClients() {
+    public Iterable<SocketIOClient> getAllClients () {
         Collection<XHRPollingClient> clients = sessionId2Client.values();
         return getAllClients(clients);
     }

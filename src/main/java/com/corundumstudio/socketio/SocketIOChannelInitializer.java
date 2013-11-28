@@ -15,26 +15,6 @@
  */
 package com.corundumstudio.socketio;
 
-import java.io.InputStream;
-import java.security.KeyStore;
-import java.security.Security;
-import java.util.Collection;
-
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLEngine;
-
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelPipeline;
-import io.netty.handler.codec.http.HttpObjectAggregator;
-import io.netty.handler.codec.http.HttpRequestDecoder;
-import io.netty.handler.codec.http.HttpResponseEncoder;
-import io.netty.handler.ssl.SslHandler;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.corundumstudio.socketio.ack.AckManager;
 import com.corundumstudio.socketio.handler.AuthorizeHandler;
 import com.corundumstudio.socketio.handler.PacketHandler;
@@ -46,11 +26,24 @@ import com.corundumstudio.socketio.parser.Decoder;
 import com.corundumstudio.socketio.parser.Encoder;
 import com.corundumstudio.socketio.parser.JsonSupport;
 import com.corundumstudio.socketio.scheduler.CancelableScheduler;
-import com.corundumstudio.socketio.transport.BaseClient;
-import com.corundumstudio.socketio.transport.FlashPolicyHandler;
-import com.corundumstudio.socketio.transport.FlashSocketTransport;
-import com.corundumstudio.socketio.transport.WebSocketTransport;
-import com.corundumstudio.socketio.transport.XHRPollingTransport;
+import com.corundumstudio.socketio.transport.*;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.handler.codec.http.HttpObjectAggregator;
+import io.netty.handler.codec.http.HttpRequestDecoder;
+import io.netty.handler.codec.http.HttpResponseEncoder;
+import io.netty.handler.ssl.SslHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLEngine;
+import java.io.InputStream;
+import java.security.KeyStore;
+import java.security.Security;
+import java.util.Collection;
 
 public class SocketIOChannelInitializer extends ChannelInitializer<Channel> implements DisconnectableHub {
 
@@ -66,10 +59,11 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
     public static final String SSL_HANDLER = "ssl";
     public static final String FLASH_POLICY_HANDLER = "flashPolicyHandler";
     public static final String RESOURCE_HANDLER = "resourceHandler";
-
+    public static final String LOGGING_HANDLER = "logging_handler";
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final int protocol = 1;
+
 
     private AckManager ackManager;
 
@@ -88,7 +82,7 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
     private SSLContext sslContext;
     private Configuration configuration;
 
-    public void start(Configuration configuration, NamespacesHub namespacesHub) {
+    public void start (Configuration configuration, NamespacesHub namespacesHub) {
         this.configuration = configuration;
         scheduler = new CancelableScheduler(configuration.getHeartbeatThreadPoolSize());
 
@@ -106,7 +100,8 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
         boolean isSsl = configuration.getKeyStore() != null;
         if (isSsl) {
             try {
-                sslContext = createSSLContext(configuration.getKeyStore(), configuration.getKeyStorePassword());
+                sslContext = createSSLContext(configuration.getKeyStore(),
+                        configuration.getKeyStorePassword());
             } catch (Exception e) {
                 throw new IllegalStateException(e);
             }
@@ -114,25 +109,31 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
 
         packetHandler = new PacketHandler(packetListener, decoder, namespacesHub);
         authorizeHandler = new AuthorizeHandler(connectPath, scheduler, configuration, namespacesHub);
-        xhrPollingTransport = new XHRPollingTransport(connectPath, ackManager, this, scheduler, authorizeHandler, configuration);
-        webSocketTransport = new WebSocketTransport(connectPath, isSsl, ackManager, this, authorizeHandler, heartbeatHandler);
-        flashSocketTransport = new FlashSocketTransport(connectPath, isSsl, ackManager, this, authorizeHandler, heartbeatHandler);
+        xhrPollingTransport = new XHRPollingTransport(connectPath, ackManager, this, scheduler,
+                authorizeHandler, configuration);
+        webSocketTransport = new WebSocketTransport(connectPath, isSsl, ackManager, this, authorizeHandler,
+                heartbeatHandler);
+        flashSocketTransport = new FlashSocketTransport(connectPath, isSsl, ackManager, this,
+                authorizeHandler, heartbeatHandler);
         resourceHandler = new ResourceHandler(configuration.getContext());
         socketIOEncoder = new SocketIOEncoder(encoder);
     }
 
-    public Collection<SocketIOClient> getAllClients() {
+    public Collection<SocketIOClient> getAllClients () {
         // TODO refactor to transport registry
         Iterable<SocketIOClient> xhrClients = xhrPollingTransport.getAllClients();
         Iterable<SocketIOClient> webSocketClients = webSocketTransport.getAllClients();
         Iterable<SocketIOClient> flashSocketClients = flashSocketTransport.getAllClients();
-        CompositeIterable<SocketIOClient> mainIterable = new CompositeIterable<SocketIOClient>(xhrClients, webSocketClients, flashSocketClients);
+        CompositeIterable<SocketIOClient> mainIterable = new CompositeIterable<SocketIOClient>(xhrClients,
+                webSocketClients, flashSocketClients);
         return new IterableCollection<SocketIOClient>(mainIterable);
     }
 
     @Override
-    protected void initChannel(Channel ch) throws Exception {
+    protected void initChannel (Channel ch) throws Exception {
+        log.trace("inside init channel");
         ChannelPipeline pipeline = ch.pipeline();
+        //pipeline.addLast(LOGGING_HANDLER, new LoggingHandler(LogLevel.TRACE));
         boolean isFlashTransport = configuration.getTransports().contains(FlashSocketTransport.NAME);
         if (isFlashTransport) {
             pipeline.addLast(FLASH_POLICY_HANDLER, flashPolicyHandler);
@@ -161,7 +162,8 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
         pipeline.addLast(SOCKETIO_ENCODER, socketIOEncoder);
     }
 
-    private SSLContext createSSLContext(InputStream keyStoreFile, String keyStoreFilePassword) throws Exception {
+    private SSLContext createSSLContext (InputStream keyStoreFile, String keyStoreFilePassword) throws
+            Exception {
         String algorithm = Security.getProperty("ssl.KeyManagerFactory.algorithm");
         if (algorithm == null) {
             algorithm = "SunX509";
@@ -178,7 +180,7 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
         return serverContext;
     }
 
-    public void onDisconnect(BaseClient client) {
+    public void onDisconnect (BaseClient client) {
         heartbeatHandler.onDisconnect(client);
         ackManager.onDisconnect(client);
         xhrPollingTransport.onDisconnect(client);
@@ -189,7 +191,7 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
         log.debug("Client with sessionId: {} disconnected", client.getSessionId());
     }
 
-    public void stop() {
+    public void stop () {
         scheduler.shutdown();
     }
 

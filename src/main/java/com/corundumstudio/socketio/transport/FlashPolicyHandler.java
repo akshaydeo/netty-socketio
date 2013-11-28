@@ -16,36 +16,38 @@
 package com.corundumstudio.socketio.transport;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.CharsetUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Sharable
 public class FlashPolicyHandler extends ChannelInboundHandlerAdapter {
 
-    private final ByteBuf requestBuffer = Unpooled.copiedBuffer(
-            "<policy-file-request/>", CharsetUtil.UTF_8);
+    private static final Logger log = LoggerFactory.getLogger(FlashPolicyHandler.class);
 
-    private final ByteBuf responseBuffer = Unpooled.copiedBuffer(
+    private final String requestBuffer = "<policy-file-request/>";
+
+    private final String responseBuffer =
             "<?xml version=\"1.0\"?>"
                     + "<!DOCTYPE cross-domain-policy SYSTEM \"/xml/dtds/cross-domain-policy.dtd\">"
                     + "<cross-domain-policy> "
                     + "   <site-control permitted-cross-domain-policies=\"master-only\"/>"
                     + "   <allow-access-from domain=\"*\" to-ports=\"*\" />"
-                    + "</cross-domain-policy>", CharsetUtil.UTF_8);
+                    + "</cross-domain-policy>";
 
     @Override
     public void channelRead (ChannelHandlerContext ctx, Object msg) throws Exception {
+        log.trace("inside flash policy handler");
         if (msg instanceof ByteBuf) {
             ByteBuf message = (ByteBuf) msg;
-            ByteBuf data = message.slice(0, requestBuffer.readableBytes());
+            ByteBuf data = message.slice(0, requestBuffer.getBytes().length);
             if (data.equals(requestBuffer)) {
                 message.release();
-                ChannelFuture f = ctx.writeAndFlush(Unpooled.wrappedBuffer(responseBuffer).retain());
+                ChannelFuture f = ctx.writeAndFlush(responseBuffer.getBytes());
                 f.addListener(ChannelFutureListener.CLOSE);
                 return;
             }

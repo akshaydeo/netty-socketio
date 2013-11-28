@@ -15,30 +15,6 @@
  */
 package com.corundumstudio.socketio.handler;
 
-import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandler.Sharable;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.handler.codec.http.DefaultHttpResponse;
-import io.netty.handler.codec.http.FullHttpRequest;
-import io.netty.handler.codec.http.HttpHeaders;
-import io.netty.handler.codec.http.HttpResponse;
-import io.netty.handler.codec.http.HttpResponseStatus;
-import io.netty.handler.codec.http.QueryStringDecoder;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.Disconnectable;
 import com.corundumstudio.socketio.SocketIOClient;
@@ -52,6 +28,20 @@ import com.corundumstudio.socketio.scheduler.CancelableScheduler;
 import com.corundumstudio.socketio.scheduler.SchedulerKey;
 import com.corundumstudio.socketio.scheduler.SchedulerKey.Type;
 import com.corundumstudio.socketio.transport.BaseClient;
+import io.netty.channel.*;
+import io.netty.channel.ChannelHandler.Sharable;
+import io.netty.handler.codec.http.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
+import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 @Sharable
 public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Disconnectable {
@@ -75,10 +65,12 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        log.trace("inside authorize handler");
         if (msg instanceof FullHttpRequest) {
             FullHttpRequest req = (FullHttpRequest) msg;
             Channel channel = ctx.channel();
             QueryStringDecoder queryDecoder = new QueryStringDecoder(req.getUri());
+            log.trace(req.toString());
             if (!configuration.isAllowCustomRequests()
                     && !queryDecoder.path().startsWith(connectPath)) {
                 HttpResponse res = new DefaultHttpResponse(HTTP_1_1, HttpResponseStatus.BAD_REQUEST);

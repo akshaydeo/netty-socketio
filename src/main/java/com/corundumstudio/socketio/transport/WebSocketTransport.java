@@ -15,12 +15,12 @@
  */
 package com.corundumstudio.socketio.transport;
 
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
+import com.corundumstudio.socketio.*;
+import com.corundumstudio.socketio.ack.AckManager;
+import com.corundumstudio.socketio.handler.AuthorizeHandler;
+import com.corundumstudio.socketio.messages.PacketsMessage;
+import io.netty.channel.*;
 import io.netty.channel.ChannelHandler.Sharable;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelPipeline;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpRequest;
@@ -29,23 +29,13 @@ import io.netty.handler.codec.http.websocketx.CloseWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.corundumstudio.socketio.DisconnectableHub;
-import com.corundumstudio.socketio.HeartbeatHandler;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOChannelInitializer;
-import com.corundumstudio.socketio.Transport;
-import com.corundumstudio.socketio.ack.AckManager;
-import com.corundumstudio.socketio.handler.AuthorizeHandler;
-import com.corundumstudio.socketio.messages.PacketsMessage;
 
 @Sharable
 public class WebSocketTransport extends BaseTransport {
@@ -77,6 +67,7 @@ public class WebSocketTransport extends BaseTransport {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        log.trace("inside websocket transport");
         if (msg instanceof CloseWebSocketFrame) {
             ctx.channel().close();
             ((CloseWebSocketFrame)msg).release();
