@@ -81,7 +81,6 @@ public class XHRPollingTransport extends BaseTransport {
 
     @Override
     public void channelRead (ChannelHandlerContext ctx, Object msg) throws Exception {
-        log.trace("inside xhr polling transport");
         if (msg instanceof FullHttpRequest) {
             FullHttpRequest req = (FullHttpRequest) msg;
             QueryStringDecoder queryDecoder = new QueryStringDecoder(req.getUri());
@@ -212,6 +211,7 @@ public class XHRPollingTransport extends BaseTransport {
     @Override
     public void onDisconnect (BaseClient client) {
         if (client instanceof XHRPollingClient) {
+            log.trace("sending disconnect to xhr client");
             UUID sessionId = client.getSessionId();
 
             sessionId2Client.remove(sessionId);

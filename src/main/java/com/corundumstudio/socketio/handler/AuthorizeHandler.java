@@ -55,7 +55,8 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
     private final Configuration configuration;
     private final NamespacesHub namespacesHub;
 
-    public AuthorizeHandler(String connectPath, CancelableScheduler scheduler, Configuration configuration, NamespacesHub namespacesHub) {
+    public AuthorizeHandler (String connectPath, CancelableScheduler scheduler,
+            Configuration configuration, NamespacesHub namespacesHub) {
         super();
         this.connectPath = connectPath;
         this.configuration = configuration;
@@ -64,7 +65,7 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead (ChannelHandlerContext ctx, Object msg) throws Exception {
         log.trace("inside authorize handler");
         if (msg instanceof FullHttpRequest) {
             FullHttpRequest req = (FullHttpRequest) msg;
@@ -89,7 +90,7 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
         ctx.fireChannelRead(msg);
     }
 
-    private void authorize(Channel channel, String origin, Map<String, List<String>> params)
+    private void authorize (Channel channel, String origin, Map<String, List<String>> params)
             throws IOException {
         final UUID sessionId = UUID.randomUUID();
         authorizedSessionIds.add(sessionId);
@@ -101,7 +102,8 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
             heartbeatTimeoutVal = "";
         }
 
-        String msg = sessionId + ":" + heartbeatTimeoutVal + ":" + configuration.getCloseTimeout() + ":" + configuration.getTransports();
+        String msg = sessionId + ":" + heartbeatTimeoutVal + ":" + configuration.getCloseTimeout() + ":" +
+                configuration.getTransports();
 
         List<String> jsonpParams = params.get("jsonp");
         String jsonpParam = null;
@@ -113,14 +115,14 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
         log.debug("New sessionId: {} authorized", sessionId);
     }
 
-    private void scheduleDisconnect(Channel channel, final UUID sessionId) {
+    private void scheduleDisconnect (Channel channel, final UUID sessionId) {
         channel.closeFuture().addListener(new ChannelFutureListener() {
             @Override
-            public void operationComplete(ChannelFuture future) throws Exception {
+            public void operationComplete (ChannelFuture future) throws Exception {
                 SchedulerKey key = new SchedulerKey(Type.AUTHORIZE, sessionId);
                 disconnectScheduler.schedule(key, new Runnable() {
                     @Override
-                    public void run() {
+                    public void run () {
                         authorizedSessionIds.remove(sessionId);
                         log.debug("Authorized sessionId: {} removed due to connection timeout", sessionId);
                     }
@@ -129,11 +131,11 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
         });
     }
 
-    public boolean isSessionAuthorized(UUID sessionId) {
+    public boolean isSessionAuthorized (UUID sessionId) {
         return authorizedSessionIds.contains(sessionId);
     }
 
-    public void connect(BaseClient client) {
+    public void connect (BaseClient client) {
         SchedulerKey key = new SchedulerKey(Type.AUTHORIZE, client.getSessionId());
         disconnectScheduler.cancel(key);
         client.send(new Packet(PacketType.CONNECT));
@@ -144,7 +146,7 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
     }
 
     @Override
-    public void onDisconnect(BaseClient client) {
+    public void onDisconnect (BaseClient client) {
         authorizedSessionIds.remove(client.getSessionId());
     }
 

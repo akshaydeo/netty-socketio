@@ -15,19 +15,22 @@
  */
 package com.corundumstudio.socketio.transport;
 
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-
-import java.util.UUID;
-
 import com.corundumstudio.socketio.DisconnectableHub;
 import com.corundumstudio.socketio.Transport;
 import com.corundumstudio.socketio.ack.AckManager;
 import com.corundumstudio.socketio.messages.XHRNewChannelMessage;
 import com.corundumstudio.socketio.messages.XHRPacketMessage;
 import com.corundumstudio.socketio.parser.Packet;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.UUID;
 
 public class XHRPollingClient extends BaseClient {
+
+    private static final Logger log = LoggerFactory.getLogger(XHRPollingClient.class);
 
     private String origin;
 
@@ -36,8 +39,10 @@ public class XHRPollingClient extends BaseClient {
     }
 
     public void bindChannel(Channel channel, String origin) {
+        log.trace("Binding new channel");
         this.origin = origin;
         setChannel(channel);
+        log.trace("Sending new channel message");
         channel.write(new XHRNewChannelMessage(origin, getSessionId()));
     }
 
@@ -46,6 +51,7 @@ public class XHRPollingClient extends BaseClient {
     }
 
     public ChannelFuture send(Packet packet) {
+        log.trace("Sending data");
         return getChannel().write(new XHRPacketMessage(getSessionId(), origin, packet));
     }
 
