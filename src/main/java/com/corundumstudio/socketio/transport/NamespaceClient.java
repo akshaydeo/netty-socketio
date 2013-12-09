@@ -181,6 +181,7 @@ public class NamespaceClient implements SocketIOClient {
         namespace.leaveRoom(roomKey, this);
     }
 
+    @Override
     public Map<String, List<String>> getParams () {
         return this.baseClient.getParams();
     }

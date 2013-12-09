@@ -15,10 +15,12 @@
  */
 package com.corundumstudio.socketio;
 
-import java.net.SocketAddress;
-import java.util.UUID;
-
 import com.corundumstudio.socketio.parser.Packet;
+
+import java.net.SocketAddress;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 
 /**
@@ -110,4 +112,9 @@ public interface SocketIOClient extends ClientOperations {
      */
     <T> void leaveRoom(T roomKey);
 
+
+    /**
+     * Get the parameters associated with socket request
+     */
+    Map<String, List<String>> getParams();
 }
