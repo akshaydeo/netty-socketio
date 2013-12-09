@@ -26,6 +26,8 @@ import io.netty.channel.ChannelFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class XHRPollingClient extends BaseClient {
@@ -34,11 +36,12 @@ public class XHRPollingClient extends BaseClient {
 
     private String origin;
 
-    public XHRPollingClient(AckManager ackManager, DisconnectableHub disconnectable, UUID sessionId, Transport transport) {
-        super(sessionId, ackManager, disconnectable, transport);
+    public XHRPollingClient (AckManager ackManager, DisconnectableHub disconnectable, UUID sessionId,
+            Transport transport, Map<String, List<String>> params) {
+        super(sessionId, ackManager, disconnectable, transport, params);
     }
 
-    public void bindChannel(Channel channel, String origin) {
+    public void bindChannel (Channel channel, String origin) {
         log.trace("Binding new channel");
         this.origin = origin;
         setChannel(channel);
@@ -46,11 +49,11 @@ public class XHRPollingClient extends BaseClient {
         channel.write(new XHRNewChannelMessage(origin, getSessionId()));
     }
 
-    public String getOrigin() {
+    public String getOrigin () {
         return origin;
     }
 
-    public ChannelFuture send(Packet packet) {
+    public ChannelFuture send (Packet packet) {
         log.trace("Sending data");
         return getChannel().write(new XHRPacketMessage(getSessionId(), origin, packet));
     }

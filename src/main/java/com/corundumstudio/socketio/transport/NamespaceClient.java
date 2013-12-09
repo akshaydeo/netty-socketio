@@ -15,10 +15,6 @@
  */
 package com.corundumstudio.socketio.transport;
 
-import java.net.SocketAddress;
-import java.util.Collections;
-import java.util.UUID;
-
 import com.corundumstudio.socketio.AckCallback;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.Transport;
@@ -26,38 +22,44 @@ import com.corundumstudio.socketio.namespace.Namespace;
 import com.corundumstudio.socketio.parser.Packet;
 import com.corundumstudio.socketio.parser.PacketType;
 
+import java.net.SocketAddress;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
 public class NamespaceClient implements SocketIOClient {
 
     private final BaseClient baseClient;
     private final Namespace namespace;
 
-    public NamespaceClient(BaseClient baseClient, Namespace namespace) {
+    public NamespaceClient (BaseClient baseClient, Namespace namespace) {
         this.baseClient = baseClient;
         this.namespace = namespace;
         namespace.addClient(this);
     }
 
-    public BaseClient getBaseClient() {
+    public BaseClient getBaseClient () {
         return baseClient;
     }
 
     @Override
-    public Transport getTransport() {
+    public Transport getTransport () {
         return baseClient.getTransport();
     }
 
     @Override
-    public boolean isChannelOpen() {
+    public boolean isChannelOpen () {
         return baseClient.getChannel().isOpen();
     }
 
     @Override
-    public Namespace getNamespace() {
+    public Namespace getNamespace () {
         return namespace;
     }
 
     @Override
-    public void sendEvent(String name, Object data) {
+    public void sendEvent (String name, Object data) {
         Packet packet = new Packet(PacketType.EVENT);
         packet.setName(name);
         packet.setArgs(Collections.singletonList(data));
@@ -65,7 +67,7 @@ public class NamespaceClient implements SocketIOClient {
     }
 
     @Override
-    public void sendEvent(String name, Object data, AckCallback<?> ackCallback) {
+    public void sendEvent (String name, Object data, AckCallback<?> ackCallback) {
         Packet packet = new Packet(PacketType.EVENT);
         packet.setName(name);
         packet.setArgs(Collections.singletonList(data));
@@ -73,28 +75,28 @@ public class NamespaceClient implements SocketIOClient {
     }
 
     @Override
-    public void sendMessage(String message, AckCallback<?> ackCallback) {
+    public void sendMessage (String message, AckCallback<?> ackCallback) {
         Packet packet = new Packet(PacketType.MESSAGE);
         packet.setData(message);
         send(packet, ackCallback);
     }
 
     @Override
-    public void sendMessage(String message) {
+    public void sendMessage (String message) {
         Packet packet = new Packet(PacketType.MESSAGE);
         packet.setData(message);
         send(packet);
     }
 
     @Override
-    public void sendJsonObject(Object object) {
+    public void sendJsonObject (Object object) {
         Packet packet = new Packet(PacketType.JSON);
         packet.setData(object);
         send(packet);
     }
 
     @Override
-    public void send(Packet packet, AckCallback<?> ackCallback) {
+    public void send (Packet packet, AckCallback<?> ackCallback) {
         long index = baseClient.getAckManager().registerAck(getSessionId(), ackCallback);
         packet.setId(index);
         if (!ackCallback.getResultClass().equals(Void.class)) {
@@ -104,41 +106,41 @@ public class NamespaceClient implements SocketIOClient {
     }
 
     @Override
-    public void send(Packet packet) {
+    public void send (Packet packet) {
         packet.setEndpoint(namespace.getName());
         baseClient.send(packet);
     }
 
     @Override
-    public void sendJsonObject(Object object, AckCallback<?> ackCallback) {
+    public void sendJsonObject (Object object, AckCallback<?> ackCallback) {
         Packet packet = new Packet(PacketType.JSON);
         packet.setData(object);
         send(packet, ackCallback);
     }
 
-    public void onDisconnect() {
+    public void onDisconnect () {
         namespace.onDisconnect(this);
         baseClient.removeChildClient(this);
     }
 
     @Override
-    public void disconnect() {
+    public void disconnect () {
         send(new Packet(PacketType.DISCONNECT));
         onDisconnect();
     }
 
     @Override
-    public UUID getSessionId() {
+    public UUID getSessionId () {
         return baseClient.getSessionId();
     }
 
     @Override
-    public SocketAddress getRemoteAddress() {
+    public SocketAddress getRemoteAddress () {
         return baseClient.getRemoteAddress();
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode () {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getSessionId() == null) ? 0 : getSessionId().hashCode());
@@ -148,7 +150,7 @@ public class NamespaceClient implements SocketIOClient {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals (Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -170,13 +172,18 @@ public class NamespaceClient implements SocketIOClient {
     }
 
     @Override
-    public <T> void joinRoom(T roomKey) {
+    public <T> void joinRoom (T roomKey) {
         namespace.joinRoom(roomKey, this);
     }
 
     @Override
-    public <T> void leaveRoom(T roomKey) {
+    public <T> void leaveRoom (T roomKey) {
         namespace.leaveRoom(roomKey, this);
     }
+
+    public Map<String, List<String>> getParams () {
+        return this.baseClient.getParams();
+    }
+
 
 }

@@ -46,6 +46,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -112,7 +113,7 @@ public class XHRPollingTransport extends BaseTransport {
             } else if (HttpMethod.POST.equals(req.getMethod())) {
                 onPost(sessionId, ctx, origin, req.content());
             } else if (HttpMethod.GET.equals(req.getMethod())) {
-                onGet(sessionId, ctx, origin);
+                onGet(sessionId, ctx, origin, queryDecoder);
             }
         } else {
             log.warn("Wrong {} method request path: {}, from ip: {}. Channel closed!",
@@ -170,7 +171,8 @@ public class XHRPollingTransport extends BaseTransport {
         ctx.pipeline().fireChannelRead(new PacketsMessage(client, content));
     }
 
-    private void onGet (UUID sessionId, ChannelHandlerContext ctx, String origin) {
+    private void onGet (final UUID sessionId, final ChannelHandlerContext ctx, final String origin,
+            final QueryStringDecoder queryDecoder) {
         if (!authorizeHandler.isSessionAuthorized(sessionId)) {
             log.trace("Session is not authorized");
             sendError(ctx, origin, sessionId);
@@ -179,7 +181,7 @@ public class XHRPollingTransport extends BaseTransport {
 
         XHRPollingClient client = (XHRPollingClient) sessionId2Client.get(sessionId);
         if (client == null) {
-            client = createClient(origin, ctx.channel(), sessionId);
+            client = createClient(origin, ctx.channel(), sessionId, queryDecoder.parameters());
         }
 
         client.bindChannel(ctx.channel(), origin);
@@ -188,9 +190,10 @@ public class XHRPollingTransport extends BaseTransport {
         scheduleNoop(sessionId);
     }
 
-    private XHRPollingClient createClient (String origin, Channel channel, UUID sessionId) {
+    private XHRPollingClient createClient (String origin, Channel channel, UUID sessionId,
+            Map<String, List<String>> params) {
         XHRPollingClient client = new XHRPollingClient(ackManager, disconnectable, sessionId,
-                Transport.XHRPOLLING);
+                Transport.XHRPOLLING, params);
 
         sessionId2Client.put(sessionId, client);
         client.bindChannel(channel, origin);

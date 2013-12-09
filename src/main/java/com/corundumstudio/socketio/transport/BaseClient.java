@@ -15,16 +15,6 @@
  */
 package com.corundumstudio.socketio.transport;
 
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-
-import java.net.SocketAddress;
-import java.util.Collection;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-
 import com.corundumstudio.socketio.DisconnectableHub;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.Transport;
@@ -32,6 +22,17 @@ import com.corundumstudio.socketio.ack.AckManager;
 import com.corundumstudio.socketio.namespace.Namespace;
 import com.corundumstudio.socketio.parser.Packet;
 import com.corundumstudio.socketio.parser.PacketType;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
+
+import java.net.SocketAddress;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Base class for main client.
@@ -49,14 +50,16 @@ public abstract class BaseClient {
     private final AckManager ackManager;
     private final UUID sessionId;
     private final Transport transport;
+    private final Map<String, List<String>> params;
     private Channel channel;
 
     public BaseClient(UUID sessionId, AckManager ackManager, DisconnectableHub disconnectable,
-            Transport transport) {
+            Transport transport, Map<String, List<String>> params) {
         this.sessionId = sessionId;
         this.ackManager = ackManager;
         this.disconnectable = disconnectable;
         this.transport = transport;
+        this.params = params;
     }
 
     public Transport getTransport() {
@@ -115,6 +118,10 @@ public abstract class BaseClient {
 
     Channel getChannel() {
         return channel;
+    }
+
+    public Map<String, List<String>> getParams(){
+        return this.params;
     }
 
     void setChannel(Channel channel) {

@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -44,8 +45,10 @@ public class WebSocketTransport extends BaseTransport {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    private final Map<UUID, WebSocketClient> sessionId2Client = new ConcurrentHashMap<UUID, WebSocketClient>();
-    private final Map<Channel, WebSocketClient> channelId2Client = new ConcurrentHashMap<Channel, WebSocketClient>();
+    private final Map<UUID, WebSocketClient> sessionId2Client = new ConcurrentHashMap<UUID,
+            WebSocketClient>();
+    private final Map<Channel, WebSocketClient> channelId2Client = new ConcurrentHashMap<Channel,
+            WebSocketClient>();
 
     private final AckManager ackManager;
     private final HeartbeatHandler heartbeatHandler;
@@ -55,7 +58,8 @@ public class WebSocketTransport extends BaseTransport {
     protected String path;
 
 
-    public WebSocketTransport(String connectPath, boolean isSsl, AckManager ackManager, DisconnectableHub disconnectable,
+    public WebSocketTransport (String connectPath, boolean isSsl, AckManager ackManager,
+            DisconnectableHub disconnectable,
             AuthorizeHandler authorizeHandler, HeartbeatHandler heartbeatHandler) {
         this.path = connectPath + NAME;
         this.isSsl = isSsl;
@@ -66,11 +70,11 @@ public class WebSocketTransport extends BaseTransport {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead (ChannelHandlerContext ctx, Object msg) throws Exception {
         log.trace("inside websocket transport");
         if (msg instanceof CloseWebSocketFrame) {
             ctx.channel().close();
-            ((CloseWebSocketFrame)msg).release();
+            ((CloseWebSocketFrame) msg).release();
         } else if (msg instanceof TextWebSocketFrame) {
             TextWebSocketFrame frame = (TextWebSocketFrame) msg;
             WebSocketClient client = channelId2Client.get(ctx.channel());
@@ -88,7 +92,7 @@ public class WebSocketTransport extends BaseTransport {
             QueryStringDecoder queryDecoder = new QueryStringDecoder(req.getUri());
             String path = queryDecoder.path();
             if (path.startsWith(this.path)) {
-                handshake(ctx, path, req);
+                handshake(ctx, queryDecoder, req);
                 req.release();
             } else {
                 ctx.fireChannelRead(msg);
@@ -99,12 +103,12 @@ public class WebSocketTransport extends BaseTransport {
     }
 
     @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+    public void channelReadComplete (ChannelHandlerContext ctx) throws Exception {
         ctx.flush();
     }
 
     @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+    public void channelInactive (ChannelHandlerContext ctx) throws Exception {
         WebSocketClient client = channelId2Client.get(ctx.channel());
         if (client != null) {
             client.onChannelDisconnect();
@@ -113,12 +117,15 @@ public class WebSocketTransport extends BaseTransport {
         }
     }
 
-    private void handshake(ChannelHandlerContext ctx, String path, FullHttpRequest req) {
+    private void handshake (final ChannelHandlerContext ctx, final QueryStringDecoder
+            queryDecoder,
+            final FullHttpRequest req) {
+        final String path = queryDecoder.path();
         final Channel channel = ctx.channel();
         String[] parts = path.split("/");
         if (parts.length <= 3) {
             log.warn("Wrong GET request path: {}, from ip: {}. Channel closed!",
-                        path, channel.remoteAddress());
+                    path, channel.remoteAddress());
             channel.close();
             return;
         }
@@ -132,8 +139,8 @@ public class WebSocketTransport extends BaseTransport {
             ChannelFuture f = handshaker.handshake(channel, req);
             f.addListener(new ChannelFutureListener() {
                 @Override
-                public void operationComplete(ChannelFuture future) throws Exception {
-                    connectClient(channel, sessionId);
+                public void operationComplete (ChannelFuture future) throws Exception {
+                    connectClient(channel, sessionId, queryDecoder.parameters());
                 }
             });
         } else {
@@ -141,15 +148,15 @@ public class WebSocketTransport extends BaseTransport {
         }
     }
 
-    private void connectClient(Channel channel, UUID sessionId) {
+    private void connectClient (Channel channel, UUID sessionId, final Map<String, List<String>> params) {
         if (!authorizeHandler.isSessionAuthorized(sessionId)) {
             log.warn("Unauthorized client with sessionId: {}, from ip: {}. Channel closed!",
-                        sessionId, channel.remoteAddress());
+                    sessionId, channel.remoteAddress());
             channel.close();
             return;
         }
-
-        WebSocketClient client = new WebSocketClient(channel, ackManager, disconnectableHub, sessionId, getTransport());
+        WebSocketClient client = new WebSocketClient(channel, ackManager, disconnectableHub, sessionId,
+                getTransport(), params);
 
         channelId2Client.put(channel, client);
         sessionId2Client.put(sessionId, client);
@@ -159,15 +166,15 @@ public class WebSocketTransport extends BaseTransport {
         removeHandler(channel.pipeline());
     }
 
-    protected Transport getTransport() {
+    protected Transport getTransport () {
         return Transport.WEBSOCKET;
     }
 
-    protected void removeHandler(ChannelPipeline pipeline) {
+    protected void removeHandler (ChannelPipeline pipeline) {
         pipeline.remove(SocketIOChannelInitializer.FLASH_SOCKET_TRANSPORT);
     }
 
-    private String getWebSocketLocation(HttpRequest req) {
+    private String getWebSocketLocation (HttpRequest req) {
         String protocol = "ws://";
         if (isSsl) {
             protocol = "wss://";
@@ -176,7 +183,7 @@ public class WebSocketTransport extends BaseTransport {
     }
 
     @Override
-    public void onDisconnect(BaseClient client) {
+    public void onDisconnect (BaseClient client) {
         if (client instanceof WebSocketClient) {
             WebSocketClient webClient = (WebSocketClient) client;
             sessionId2Client.remove(webClient.getSessionId());
@@ -184,7 +191,7 @@ public class WebSocketTransport extends BaseTransport {
         }
     }
 
-    public Iterable<SocketIOClient> getAllClients() {
+    public Iterable<SocketIOClient> getAllClients () {
         Collection<WebSocketClient> clients = sessionId2Client.values();
         return getAllClients(clients);
     }
