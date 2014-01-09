@@ -16,11 +16,13 @@
 package com.corundumstudio.socketio.transport;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,29 +31,28 @@ public class FlashPolicyHandler extends ChannelInboundHandlerAdapter {
 
     private static final Logger log = LoggerFactory.getLogger(FlashPolicyHandler.class);
 
-    private final String requestBuffer = "<policy-file-request/>";
+    private final ByteBuf requestBuffer = Unpooled.copiedBuffer("<policy-file-request/>", CharsetUtil.UTF_8);
 
-    private final String responseBuffer =
+    private final ByteBuf responseBuffer = Unpooled.copiedBuffer(
             "<?xml version=\"1.0\"?>"
                     + "<!DOCTYPE cross-domain-policy SYSTEM \"/xml/dtds/cross-domain-policy.dtd\">"
                     + "<cross-domain-policy> "
                     + "   <site-control permitted-cross-domain-policies=\"master-only\"/>"
                     + "   <allow-access-from domain=\"*\" to-ports=\"*\" />"
-                    + "</cross-domain-policy>";
+                    + "</cross-domain-policy>", CharsetUtil.UTF_8);
 
     @Override
-    public void channelRead (ChannelHandlerContext ctx, Object msg) throws Exception {
-        log.trace("inside flash policy handler");
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof ByteBuf) {
             ByteBuf message = (ByteBuf) msg;
-            ByteBuf data = message.slice(0, requestBuffer.getBytes().length);
+            ByteBuf data = message.slice(0, requestBuffer.readableBytes());
             if (data.equals(requestBuffer)) {
                 message.release();
-                ChannelFuture f = ctx.writeAndFlush(responseBuffer.getBytes());
+                ChannelFuture f = ctx.writeAndFlush(Unpooled.copiedBuffer(responseBuffer));
                 f.addListener(ChannelFutureListener.CLOSE);
                 return;
             }
-            ctx.pipeline().remove(this);
+            //ctx.pipeline().remove(this);
         }
         ctx.fireChannelRead(msg);
     }

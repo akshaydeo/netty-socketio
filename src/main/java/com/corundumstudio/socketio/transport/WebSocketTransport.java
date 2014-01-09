@@ -84,7 +84,6 @@ public class WebSocketTransport extends BaseTransport {
                 frame.release();
                 return;
             }
-
             ctx.pipeline().fireChannelRead(new PacketsMessage(client, frame.content()));
             frame.release();
         } else if (msg instanceof FullHttpRequest) {
@@ -131,7 +130,6 @@ public class WebSocketTransport extends BaseTransport {
         }
 
         final UUID sessionId = UUID.fromString(parts[4]);
-
         WebSocketServerHandshakerFactory factory = new WebSocketServerHandshakerFactory(
                 getWebSocketLocation(req), null, false);
         WebSocketServerHandshaker handshaker = factory.newHandshaker(req);

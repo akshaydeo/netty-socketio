@@ -62,7 +62,6 @@ public class PacketHandler extends SimpleChannelInboundHandler<PacketsMessage> {
             try {
                 Packet packet = decoder.decodePackets(content, client.getSessionId());
                 Namespace ns = namespacesHub.get(packet.getEndpoint());
-
                 NamespaceClient nClient = (NamespaceClient) client.getChildClient(ns);
                 packetListener.onPacket(packet, nClient);
             } catch (Exception ex) {
