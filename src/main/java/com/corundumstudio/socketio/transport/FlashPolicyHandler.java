@@ -52,7 +52,7 @@ public class FlashPolicyHandler extends ChannelInboundHandlerAdapter {
                 f.addListener(ChannelFutureListener.CLOSE);
                 return;
             }
-            //ctx.pipeline().remove(this);
+            ctx.pipeline().remove(this);
         }
         ctx.fireChannelRead(msg);
     }
