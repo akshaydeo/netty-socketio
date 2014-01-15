@@ -15,28 +15,19 @@
  */
 package com.corundumstudio.socketio;
 
-import static io.netty.handler.codec.http.HttpHeaders.Names.ACCESS_CONTROL_ALLOW_CREDENTIALS;
-import static io.netty.handler.codec.http.HttpHeaders.Names.ACCESS_CONTROL_ALLOW_ORIGIN;
-import static io.netty.handler.codec.http.HttpHeaders.Names.CONNECTION;
-import static io.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
-import static io.netty.handler.codec.http.HttpHeaders.Values.KEEP_ALIVE;
-import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
+import com.corundumstudio.socketio.messages.*;
+import com.corundumstudio.socketio.messages.HttpMessage;
+import com.corundumstudio.socketio.parser.Encoder;
+import com.corundumstudio.socketio.parser.Packet;
+import com.corundumstudio.socketio.transport.BaseClient;
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.*;
 import io.netty.channel.ChannelHandler.Sharable;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelOutboundHandlerAdapter;
-import io.netty.channel.ChannelPromise;
-import io.netty.handler.codec.http.DefaultHttpResponse;
-import io.netty.handler.codec.http.HttpHeaders;
-import io.netty.handler.codec.http.HttpResponse;
-import io.netty.handler.codec.http.HttpResponseStatus;
-import io.netty.handler.codec.http.LastHttpContent;
+import io.netty.handler.codec.http.*;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketFrame;
-import io.netty.util.CharsetUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Queue;
@@ -46,21 +37,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.corundumstudio.socketio.messages.AuthorizeMessage;
-import com.corundumstudio.socketio.messages.BaseMessage;
-import com.corundumstudio.socketio.messages.HttpMessage;
-import com.corundumstudio.socketio.messages.WebSocketPacketMessage;
-import com.corundumstudio.socketio.messages.WebsocketErrorMessage;
-import com.corundumstudio.socketio.messages.XHRErrorMessage;
-import com.corundumstudio.socketio.messages.XHRNewChannelMessage;
-import com.corundumstudio.socketio.messages.XHROutMessage;
-import com.corundumstudio.socketio.messages.XHRPacketMessage;
-import com.corundumstudio.socketio.parser.Encoder;
-import com.corundumstudio.socketio.parser.Packet;
-import com.corundumstudio.socketio.transport.BaseClient;
+import static io.netty.handler.codec.http.HttpHeaders.Names.*;
+import static io.netty.handler.codec.http.HttpHeaders.Values.KEEP_ALIVE;
+import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 @Sharable
 public class SocketIOEncoder extends ChannelOutboundHandlerAdapter implements Disconnectable {
@@ -136,10 +115,6 @@ public class SocketIOEncoder extends ChannelOutboundHandlerAdapter implements Di
         HttpResponse res = createHttpResponse(msg.getOrigin(), out);
         channel.write(res);
 
-        if (log.isTraceEnabled()) {
-            log.trace("Out message: {} - sessionId: {}",
-                        out.toString(CharsetUtil.UTF_8), msg.getSessionId());
-        }
         if (out.isReadable()) {
             channel.write(out);
         } else {
@@ -214,8 +189,6 @@ public class SocketIOEncoder extends ChannelOutboundHandlerAdapter implements Di
     private void handle(WebSocketPacketMessage webSocketPacketMessage, Channel channel, ByteBuf out) throws IOException {
         encoder.encodePacket(webSocketPacketMessage.getPacket(), out);
         WebSocketFrame res = new TextWebSocketFrame(out);
-        log.trace("Out message: {} sessionId: {}",
-                        out.toString(CharsetUtil.UTF_8), webSocketPacketMessage.getSessionId());
         channel.writeAndFlush(res);
         if (!out.isReadable()) {
             out.release();

@@ -214,7 +214,7 @@ public class XHRPollingTransport extends BaseTransport {
     @Override
     public void onDisconnect (BaseClient client) {
         if (client instanceof XHRPollingClient) {
-            log.trace("sending disconnect to xhr client");
+            log.debug("sending disconnect to xhr client");
             UUID sessionId = client.getSessionId();
 
             sessionId2Client.remove(sessionId);

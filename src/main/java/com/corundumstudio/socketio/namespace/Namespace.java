@@ -15,13 +15,6 @@
  */
 package com.corundumstudio.socketio.namespace;
 
-import java.util.Collections;
-import java.util.Queue;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ConcurrentMap;
-
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.BroadcastOperations;
 import com.corundumstudio.socketio.SocketIOClient;
@@ -33,6 +26,15 @@ import com.corundumstudio.socketio.listener.DisconnectListener;
 import com.corundumstudio.socketio.misc.ConcurrentHashSet;
 import com.corundumstudio.socketio.parser.JsonSupport;
 import com.corundumstudio.socketio.transport.NamespaceClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Collections;
+import java.util.Queue;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Hub object for all clients in one namespace.
@@ -42,6 +44,7 @@ import com.corundumstudio.socketio.transport.NamespaceClient;
  */
 public class Namespace implements SocketIONamespace {
 
+    private static final Logger logger = LoggerFactory.getLogger(Namespace.class);
     public static final String DEFAULT_NAME = "";
 
     private final Set<SocketIOClient> allClients = new ConcurrentHashSet<SocketIOClient>();
@@ -136,6 +139,7 @@ public class Namespace implements SocketIONamespace {
     }
 
     public void onDisconnect(SocketIOClient client) {
+        logger.debug("onDisconnect");
         for (DisconnectListener listener : disconnectListeners) {
             listener.onDisconnect(client);
         }

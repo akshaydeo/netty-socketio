@@ -38,11 +38,12 @@ public class FlashPolicyHandler extends ChannelInboundHandlerAdapter {
                     + "<!DOCTYPE cross-domain-policy SYSTEM \"/xml/dtds/cross-domain-policy.dtd\">"
                     + "<cross-domain-policy> "
                     + "   <site-control permitted-cross-domain-policies=\"master-only\"/>"
-                    + "   <allow-access-from domain=\"*\" to-ports=\"*\" />"
+                    + "   <allow-access-from domain=\"*\" to-ports=\"*\" secure=\"false\"/>"
+                    + "   <allow-http-request-headers-from domain=\"*\" headers=\"*\""
                     + "</cross-domain-policy>", CharsetUtil.UTF_8);
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead (ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof ByteBuf) {
             ByteBuf message = (ByteBuf) msg;
             ByteBuf data = message.slice(0, requestBuffer.readableBytes());
@@ -52,7 +53,7 @@ public class FlashPolicyHandler extends ChannelInboundHandlerAdapter {
                 f.addListener(ChannelFutureListener.CLOSE);
                 return;
             }
-                ctx.pipeline().remove(this);
+            ctx.pipeline().remove(this);
         }
         ctx.fireChannelRead(msg);
     }
