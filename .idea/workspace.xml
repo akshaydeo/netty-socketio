@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="43611c17-7345-4d22-92be-103694f0305c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/namespace/Namespace.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/namespace/Namespace.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOEncoder.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOEncoder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingTransport.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingTransport.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="netty-socketio.iws" />
@@ -20,8 +17,8 @@
     <file path="/CommetMessageFactory.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385771612184" ignored="false" />
     <file path="$PROJECT_DIR$/../transporter/netty4x/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389794846474" ignored="false" />
     <file path="/AuthorizeHandler.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385721779088" ignored="false" />
-    <file path="$PROJECT_DIR$/../transporter/socketio/src/main/java/com/rc/transporter/socketio/SocketIoTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389794846474" ignored="false" />
-    <file path="/SocketIoTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389729424944" ignored="false" />
+    <file path="$PROJECT_DIR$/../transporter/socketio/src/main/java/com/rc/transporter/socketio/SocketIoTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389813184225" ignored="false" />
+    <file path="/SocketIoTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389813182227" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389787902129" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/logback.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202646" ignored="false" />
     <file path="/XHRPollingTransport.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389729492898" ignored="false" />
@@ -50,7 +47,7 @@
     <file path="/NettyChannel.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385771500526" ignored="false" />
     <file path="$PROJECT_DIR$/../transporter/socketio/src/main/java/com/rc/transporter/socketio/SocketIoChannel.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389794846474" ignored="false" />
     <file path="/SocketIoChannel.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389728545724" ignored="false" />
-    <file path="$PROJECT_DIR$/../transporter/netty4x/src/main/java/com/rc/transporter/netty4x/DynamicNettyTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389794846474" ignored="false" />
+    <file path="$PROJECT_DIR$/../transporter/netty4x/src/main/java/com/rc/transporter/netty4x/DynamicNettyTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389816821745" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/graphite/SystemLoadReporter.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386014959491" ignored="false" />
     <file path="/SystemLoadReporter.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386014957956" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-as-clients/appsurfer-protocol-library/src/main/as/com.appsurfer.client.core/components/HttpUtil.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388455484731" ignored="false" />
@@ -86,8 +83,8 @@
     <file path="/SocketIoTransportServer.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1387997876599" ignored="false" />
     <file path="/SocketIOService.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389221412661" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-socket_io_session_manager/src/main/java/com/appsurfer/node/v3/socket_io/SocketIOService.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202646" ignored="false" />
-    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-socket_io_session_manager/src/main/java/com/appsurfer/node/v3/socket_io/transporter/AppSurferSocketIOTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202986" ignored="false" />
-    <file path="/AppSurferSocketIOTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386606480560" ignored="false" />
+    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-socket_io_session_manager/src/main/java/com/appsurfer/node/v3/socket_io/transporter/AppSurferSocketIOTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389817180883" ignored="false" />
+    <file path="/AppSurferSocketIOTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389813262961" ignored="false" />
     <file path="$MAVEN_REPOSITORY$/com/rainingclouds/socketio/1.1-BETA/socketio-1.1-BETA.jar!/com/rc/transporter/socketio/SocketIoTransportSession.class" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386606937460" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/display_manager_sessions/DisplayManagerClientSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202646" ignored="false" />
     <file path="/DisplayManagerClientSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386607615961" ignored="false" />
@@ -109,7 +106,7 @@
     <file path="/Client.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389448871166" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/event_manager_sessions/EventManagerComponentSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389789911077" ignored="false" />
     <file path="/EventManagerComponentSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389789596204" ignored="false" />
-    <file path="$PROJECT_DIR$/../transporter/netty4x/src/main/java/com/rc/transporter/netty4x/NettyTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389794846474" ignored="false" />
+    <file path="$PROJECT_DIR$/../transporter/netty4x/src/main/java/com/rc/transporter/netty4x/NettyTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389816894158" ignored="false" />
     <file path="/NettyTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389475830366" ignored="false" />
     <file path="/onClose.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1387374171394" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-as-clients/appsurfer-protocol-library/src/main/as/com.appsurfer.client.core/socketio/events/SocketIOEvents.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1387375433926" ignored="false" />
@@ -163,7 +160,7 @@
     <file path="$PROJECT_DIR$/../transporter/socketio/src/main/java/com/rc/transporter/socketio/SocketIOPipelineFactory.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389794846474" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/binary.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1387978068932" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/binary/FlashBinaryClientSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388058564532" ignored="false" />
-    <file path="/DynamicNettyTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732281413" ignored="false" />
+    <file path="/DynamicNettyTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389816799125" ignored="false" />
     <file path="/FlashBinaryClientSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388021798006" ignored="false" />
     <file path="$PROJECT_DIR$/../transporter/netty4x/src/main/java/com/rc/transporter/netty4x/IDynamicTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389794846474" ignored="false" />
     <file path="/IDynamicTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388023497779" ignored="false" />
@@ -181,9 +178,9 @@
     <file path="/EncodingTight.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388150147777" ignored="false" />
     <file path="/fragment.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389567333130" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/binary/SecureFlashBinaryClientSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388083806460" ignored="false" />
-    <file path="$PROJECT_DIR$/../appsurfer-as-clients/appsurfer-facebook-client/src/main/as/com/appsurfer/facebook/AppSurfer.mxml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389612324776" ignored="false" />
+    <file path="$PROJECT_DIR$/../appsurfer-as-clients/appsurfer-facebook-client/src/main/as/com/appsurfer/facebook/AppSurfer.mxml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389817645127" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-as-clients/appsurfer-external-flash-client-white/src/main/as/com/appsurfer/web/AppSurfer.mxml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388452717383" ignored="false" />
-    <file path="/AppSurfer.mxml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389612315520" ignored="false" />
+    <file path="/AppSurfer.mxml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389817642743" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-as-clients/appsurfer-as-socketio-library/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389469100777" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-as-clients/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388454497382" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-as-clients/appsurfer-as-socketio-library/src/main/as/websocket/WebSocketMainInsecure.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388454807489" ignored="false" />
@@ -216,8 +213,8 @@
     <file path="/SocketIOHttpUtil.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389806364493" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-as-clients/appsurfer-as-socketio-library/src/main/as/com/appsurfer/socketio/HttpChunkSocket.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389469100777" ignored="false" />
     <file path="/HttpChunkSocket.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389394615923" ignored="false" />
-    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-socket_io_session_manager/src/main/java/com/appsurfer/node/v3/socket_io/transporter/AppSurferSocketIOComboTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202986" ignored="false" />
-    <file path="/AppSurferSocketIOComboTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388591906818" ignored="false" />
+    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-socket_io_session_manager/src/main/java/com/appsurfer/node/v3/socket_io/transporter/AppSurferSocketIOComboTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389813457218" ignored="false" />
+    <file path="/AppSurferSocketIOComboTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389813310180" ignored="false" />
     <file path="/HttpCallErrorEvent.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388581524213" ignored="false" />
     <file path="/devdeploy.sh" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388593057238" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/devdeploy.sh" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389361051212" ignored="false" />
@@ -331,7 +328,7 @@
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/event_manager_sessions/client_session_states/EventServerConnectedStateConnectionMode.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202986" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/tasks/MonkeyResetTask.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202986" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/tasks/PressTask.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389722879239" ignored="false" />
-    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-device-setup-manager/src/main/java/com/appsurfer/node/v3/device_setup_manager/routines/RawSetupRoutine.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389722879239" ignored="false" />
+    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-device-setup-manager/src/main/java/com/appsurfer/node/v3/device_setup_manager/routines/RawSetupRoutine.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389810819665" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/tasks/KeyDownTask.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202986" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-event-manager/src/main/java/com/appsurfer/node/v3/event_manager/EventSessionService.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202646" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/event_manager_sessions/client_session_states/EventManagerClientSessionState.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202986" ignored="false" />
@@ -356,6 +353,8 @@
     <file path="/PushLogsToServerTask.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389795106721" ignored="false" />
     <file path="/UpdateDeviceSetupStatusTask.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389791951280" ignored="false" />
     <file path="$PROJECT_DIR$/../transporter/netty4x/src/main/java/com/rc/transporter/netty4x/DynamicTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389794846474" ignored="false" />
+    <file path="/RawSetupRoutine.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389810793179" ignored="false" />
+    <file path="$MAVEN_REPOSITORY$/com/rainingclouds/socketio/1.2-BETA/socketio-1.2-BETA.jar!/com/rc/transporter/socketio/SocketIoTransportSession.class" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389817078870" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -470,7 +469,7 @@
       <file leaf-file-name="FlashPolicyHandler.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="26" selection-start="1785" selection-end="1785" vertical-scroll-proportion="0.4488189">
+            <state line="38" column="21" selection-start="1535" selection-end="1535" vertical-scroll-proportion="0.36774194">
               <folding />
             </state>
           </provider>
@@ -1106,7 +1105,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32916147" sideWeight="0.68362284" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916147" sideWeight="0.68362284" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1281,7 +1280,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="26" selection-start="1785" selection-end="1785" vertical-scroll-proportion="0.4488189">
+        <state line="38" column="21" selection-start="1535" selection-end="1535" vertical-scroll-proportion="0.36774194">
           <folding />
         </state>
       </provider>
