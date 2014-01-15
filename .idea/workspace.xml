@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="43611c17-7345-4d22-92be-103694f0305c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="43611c17-7345-4d22-92be-103694f0305c" name="Default" comment="" />
     <ignored path="netty-socketio.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389804923695" ignored="false" />
@@ -354,7 +351,8 @@
     <file path="/UpdateDeviceSetupStatusTask.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389791951280" ignored="false" />
     <file path="$PROJECT_DIR$/../transporter/netty4x/src/main/java/com/rc/transporter/netty4x/DynamicTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389794846474" ignored="false" />
     <file path="/RawSetupRoutine.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389810793179" ignored="false" />
-    <file path="$MAVEN_REPOSITORY$/com/rainingclouds/socketio/1.2-BETA/socketio-1.2-BETA.jar!/com/rc/transporter/socketio/SocketIoTransportSession.class" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389817078870" ignored="false" />
+    <file path="$MAVEN_REPOSITORY$/com/rainingclouds/socketio/1.2-BETA/socketio-1.2-BETA.jar!/com/rc/transporter/socketio/SocketIoTransportSession.class" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389819017466" ignored="false" />
+    <file path="$MAVEN_REPOSITORY$/com/rainingclouds/socketio/1.2-BETA/socketio-1.2-BETA.jar!/logback.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389819017466" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
