@@ -15,18 +15,7 @@
  */
 package com.corundumstudio.socketio;
 
-import com.corundumstudio.socketio.ack.AckManager;
-import com.corundumstudio.socketio.handler.AuthorizeHandler;
-import com.corundumstudio.socketio.handler.PacketHandler;
-import com.corundumstudio.socketio.handler.ResourceHandler;
-import com.corundumstudio.socketio.misc.CompositeIterable;
-import com.corundumstudio.socketio.misc.IterableCollection;
-import com.corundumstudio.socketio.namespace.NamespacesHub;
-import com.corundumstudio.socketio.parser.Decoder;
-import com.corundumstudio.socketio.parser.Encoder;
-import com.corundumstudio.socketio.parser.JsonSupport;
-import com.corundumstudio.socketio.scheduler.CancelableScheduler;
-import com.corundumstudio.socketio.transport.*;
+
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -34,16 +23,46 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
 import io.netty.handler.ssl.SslHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLEngine;
 import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.Security;
 import java.util.Collection;
+
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLEngine;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+import com.corundumstudio.socketio.ack.AckManager;
+import com.corundumstudio.socketio.handler.AuthorizeHandler;
+import com.corundumstudio.socketio.handler.EncoderHandler;
+import com.corundumstudio.socketio.handler.HeartbeatHandler;
+import com.corundumstudio.socketio.handler.PacketHandler;
+import com.corundumstudio.socketio.handler.PacketListener;
+import com.corundumstudio.socketio.handler.ResourceHandler;
+import com.corundumstudio.socketio.handler.WrongUrlHandler;
+import com.corundumstudio.socketio.misc.CompositeIterable;
+import com.corundumstudio.socketio.misc.IterableCollection;
+import com.corundumstudio.socketio.namespace.NamespacesHub;
+import com.corundumstudio.socketio.parser.Decoder;
+import com.corundumstudio.socketio.parser.Encoder;
+import com.corundumstudio.socketio.parser.JsonSupport;
+import com.corundumstudio.socketio.scheduler.CancelableScheduler;
+
+
+import com.corundumstudio.socketio.store.StoreFactory;
+import com.corundumstudio.socketio.store.pubsub.DisconnectMessage;
+import com.corundumstudio.socketio.store.pubsub.PubSubStore;
+import com.corundumstudio.socketio.transport.FlashPolicyHandler;
+import com.corundumstudio.socketio.transport.FlashSocketTransport;
+import com.corundumstudio.socketio.transport.MainBaseClient;
+import com.corundumstudio.socketio.transport.WebSocketTransport;
+import com.corundumstudio.socketio.transport.XHRPollingTransport;
+
 
 public class SocketIOChannelInitializer extends ChannelInitializer<Channel> implements DisconnectableHub {
 
@@ -60,6 +79,9 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
     public static final String FLASH_POLICY_HANDLER = "flashPolicyHandler";
     public static final String RESOURCE_HANDLER = "resourceHandler";
     public static final String LOGGING_HANDLER = "logging_handler";
+    public static final String WRONG_URL_HANDLER = "wrongUrlBlocker";
+
+
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final int protocol = 1;
@@ -73,7 +95,8 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
     private FlashSocketTransport flashSocketTransport;
     private final FlashPolicyHandler flashPolicyHandler = new FlashPolicyHandler();
     private ResourceHandler resourceHandler;
-    private SocketIOEncoder socketIOEncoder;
+    private EncoderHandler encoderHandler;
+    private WrongUrlHandler wrongUrlHandler;
 
     private CancelableScheduler scheduler;
 
@@ -82,7 +105,8 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
     private SSLContext sslContext;
     private Configuration configuration;
 
-    public void start (Configuration configuration, NamespacesHub namespacesHub) {
+
+    public void start (Configuration configuration, final NamespacesHub namespacesHub) {
         this.configuration = configuration;
         scheduler = new CancelableScheduler(configuration.getHeartbeatThreadPoolSize());
 
@@ -109,14 +133,21 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
 
         packetHandler = new PacketHandler(packetListener, decoder, namespacesHub);
         authorizeHandler = new AuthorizeHandler(connectPath, scheduler, configuration, namespacesHub);
+
+
+        StoreFactory factory = configuration.getStoreFactory();
+        factory.init(namespacesHub, authorizeHandler, jsonSupport);
+
         xhrPollingTransport = new XHRPollingTransport(connectPath, ackManager, this, scheduler,
                 authorizeHandler, configuration);
         webSocketTransport = new WebSocketTransport(connectPath, isSsl, ackManager, this, authorizeHandler,
-                heartbeatHandler);
+                heartbeatHandler, factory);
         flashSocketTransport = new FlashSocketTransport(connectPath, isSsl, ackManager, this,
-                authorizeHandler, heartbeatHandler);
+                authorizeHandler, heartbeatHandler, factory);
+
         resourceHandler = new ResourceHandler(configuration.getContext());
-        socketIOEncoder = new SocketIOEncoder(encoder);
+        encoderHandler = new EncoderHandler(encoder);
+        wrongUrlHandler = new WrongUrlHandler();
     }
 
     public Collection<SocketIOClient> getAllClients () {
@@ -159,7 +190,9 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
         pipeline.addLast(WEB_SOCKET_TRANSPORT, webSocketTransport);
         pipeline.addLast(FLASH_SOCKET_TRANSPORT, flashSocketTransport);
 
-        pipeline.addLast(SOCKETIO_ENCODER, socketIOEncoder);
+        pipeline.addLast(SOCKETIO_ENCODER, encoderHandler);
+
+        pipeline.addLast(WRONG_URL_HANDLER, wrongUrlHandler);
     }
 
     private SSLContext createSSLContext (InputStream keyStoreFile, String keyStoreFilePassword) throws
@@ -180,18 +213,27 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
         return serverContext;
     }
 
-    public void onDisconnect (BaseClient client) {
+
+    public void onDisconnect (MainBaseClient client) {
+
         heartbeatHandler.onDisconnect(client);
         ackManager.onDisconnect(client);
         xhrPollingTransport.onDisconnect(client);
         webSocketTransport.onDisconnect(client);
         flashSocketTransport.onDisconnect(client);
         authorizeHandler.onDisconnect(client);
-        socketIOEncoder.onDisconnect(client);
+        configuration.getStoreFactory().onDisconnect(client);
+
+        configuration.getStoreFactory().getPubSubStore().publish(PubSubStore.DISCONNECT,
+                new DisconnectMessage(client.getSessionId()));
+
         log.debug("Client with sessionId: {} disconnected", client.getSessionId());
     }
 
+
     public void stop () {
+        StoreFactory factory = configuration.getStoreFactory();
+        factory.shutdown();
         scheduler.shutdown();
     }
 

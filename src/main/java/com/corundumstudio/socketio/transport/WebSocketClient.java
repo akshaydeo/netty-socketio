@@ -16,10 +16,12 @@
 package com.corundumstudio.socketio.transport;
 
 import com.corundumstudio.socketio.DisconnectableHub;
+import com.corundumstudio.socketio.HandshakeData;
 import com.corundumstudio.socketio.Transport;
 import com.corundumstudio.socketio.ack.AckManager;
 import com.corundumstudio.socketio.messages.WebSocketPacketMessage;
 import com.corundumstudio.socketio.parser.Packet;
+
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 
@@ -27,16 +29,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class WebSocketClient extends BaseClient {
+import com.corundumstudio.socketio.store.StoreFactory;
 
-    public WebSocketClient(Channel channel, AckManager ackManager,
-                            DisconnectableHub disconnectable, UUID sessionId,
-                             Transport transport, Map<String, List<String>> params) {
-        super(sessionId, ackManager, disconnectable, transport,params);
+
+public class WebSocketClient extends MainBaseClient {
+
+    public WebSocketClient (final Channel channel, final AckManager ackManager,
+            final DisconnectableHub disconnectable, final UUID sessionId, final Transport transport,
+            final StoreFactory storeFactory,
+            HandshakeData handshakeData) {
+        super(sessionId, ackManager, disconnectable, transport, storeFactory, handshakeData);
         setChannel(channel);
     }
 
-    public ChannelFuture send(Packet packet) {
+    public ChannelFuture send (Packet packet) {
         return getChannel().write(new WebSocketPacketMessage(getSessionId(), packet));
     }
 

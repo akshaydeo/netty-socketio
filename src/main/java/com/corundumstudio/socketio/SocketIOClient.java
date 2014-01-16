@@ -16,105 +16,112 @@
 package com.corundumstudio.socketio;
 
 import com.corundumstudio.socketio.parser.Packet;
+import com.corundumstudio.socketio.store.Store;
 
 import java.net.SocketAddress;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 
 /**
- * SocketIO client abstraction.
- * All implementations are thread-safe.
- *
+ * Fully thread-safe.
  */
-public interface SocketIOClient extends ClientOperations {
+public interface SocketIOClient extends ClientOperations, Store {
+
+    /**
+     * Handshake data used during client connection
+     *
+     * @return HandshakeData
+     */
+    HandshakeData getHandshakeData ();
 
     /**
      * Current client transport protocol
      *
      * @return transport protocol
      */
-    Transport getTransport();
+    Transport getTransport ();
 
     /**
      * Send event with ack callback
      *
-     * @param name - event name
-     * @param data - event data
+     * @param name        - event name
+     * @param data        - event data
      * @param ackCallback - ack callback
      */
-    void sendEvent(String name, Object data, AckCallback<?> ackCallback);
+    void sendEvent (String name, Object data, AckCallback<?> ackCallback);
 
     /**
      * Send packet with ack callback
      *
-     * @param packet - packet to send
+     * @param packet      - packet to send
      * @param ackCallback - ack callback
      */
-    void send(Packet packet, AckCallback<?> ackCallback);
+    void send (Packet packet, AckCallback<?> ackCallback);
 
     /**
      * Send object with ack callback
      *
-     * @param object - object to send
+     * @param object      - object to send
      * @param ackCallback - ack callback
      */
-    void sendJsonObject(Object object, AckCallback<?> ackCallback);
+    void sendJsonObject (Object object, AckCallback<?> ackCallback);
 
     /**
      * Send message with ack callback
      *
-     * @param message - message to send
+     * @param message     - message to send
      * @param ackCallback - ack callback
      */
-    void sendMessage(String message, AckCallback<?> ackCallback);
+    void sendMessage (String message, AckCallback<?> ackCallback);
 
     /**
      * Client namespace
      *
      * @return - namespace
      */
-    SocketIONamespace getNamespace();
+    SocketIONamespace getNamespace ();
 
     /**
      * Client session id, uses {@link UUID} object
      *
      * @return - session id
      */
-    UUID getSessionId();
+    UUID getSessionId ();
 
     /**
      * Get client remote address
      *
      * @return remote address
      */
-    SocketAddress getRemoteAddress();
+    SocketAddress getRemoteAddress ();
 
     /**
      * Check is underlying channel open
      *
      * @return <code>true</code> if channel open, otherwise <code>false</code>
      */
-    boolean isChannelOpen();
+    boolean isChannelOpen ();
 
     /**
      * Join client to room
      *
-     * @param roomKey - any object with correct hashcode & equals implementation
+     * @param room
      */
-    <T> void joinRoom(T roomKey);
+    void joinRoom (String room);
 
     /**
      * Join client to room
      *
-     * @param roomKey - any object with correct hashcode & equals implementation
+     * @param room
      */
-    <T> void leaveRoom(T roomKey);
-
+    void leaveRoom (String room);
 
     /**
-     * Get the parameters associated with socket request
+     * Get all rooms a client is joined in.
+     *
+     * @return
      */
-    Map<String, List<String>> getParams();
+    List<String> getAllRooms ();
+
 }

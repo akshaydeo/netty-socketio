@@ -24,13 +24,12 @@ import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.corundumstudio.socketio.PacketListener;
 import com.corundumstudio.socketio.messages.PacketsMessage;
 import com.corundumstudio.socketio.namespace.Namespace;
 import com.corundumstudio.socketio.namespace.NamespacesHub;
 import com.corundumstudio.socketio.parser.Decoder;
 import com.corundumstudio.socketio.parser.Packet;
-import com.corundumstudio.socketio.transport.BaseClient;
+import com.corundumstudio.socketio.transport.MainBaseClient;
 import com.corundumstudio.socketio.transport.NamespaceClient;
 
 @Sharable
@@ -53,7 +52,7 @@ public class PacketHandler extends SimpleChannelInboundHandler<PacketsMessage> {
     protected void channelRead0(io.netty.channel.ChannelHandlerContext ctx, PacketsMessage message)
                 throws Exception {
         ByteBuf content = message.getContent();
-        BaseClient client = message.getClient();
+        MainBaseClient client = message.getClient();
 
         if (log.isTraceEnabled()) {
             log.trace("In message: {} sessionId: {}", content.toString(CharsetUtil.UTF_8), client.getSessionId());
@@ -62,6 +61,12 @@ public class PacketHandler extends SimpleChannelInboundHandler<PacketsMessage> {
             try {
                 Packet packet = decoder.decodePackets(content, client.getSessionId());
                 Namespace ns = namespacesHub.get(packet.getEndpoint());
+
+                if (ns == null) {
+                    log.warn("Can't find namespace for endpoint: {} probably it was removed.", packet.getEndpoint());
+                    return;
+                }
+
                 NamespaceClient nClient = (NamespaceClient) client.getChildClient(ns);
                 packetListener.onPacket(packet, nClient);
             } catch (Exception ex) {

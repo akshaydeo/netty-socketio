@@ -13,14 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.corundumstudio.socketio.messages;
+package com.corundumstudio.socketio.store.pubsub;
 
 import java.util.UUID;
 
-public class XHRNewChannelMessage extends HttpMessage {
+public class ConnectMessage extends PubSubMessage {
 
-    public XHRNewChannelMessage(String origin, UUID sessionId) {
-        super(origin, sessionId);
+    private static final long serialVersionUID = 3108918714495865101L;
+
+    private UUID sessionId;
+
+    public ConnectMessage() {
+    }
+
+    public ConnectMessage(UUID sessionId) {
+        super();
+        this.sessionId = sessionId;
+    }
+
+    public UUID getSessionId() {
+        return sessionId;
     }
 
 }

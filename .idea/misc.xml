@@ -3,6 +3,9 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="Osmorc" url="file://$PROJECT_DIR$" />
+  </component>
   <component name="IdProvider" IDEtalkID="6A66D5955E76498270E1FB932F2E5148" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">

@@ -15,7 +15,14 @@
  */
 package com.corundumstudio.socketio.transport;
 
+
+import java.net.SocketAddress;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
 import com.corundumstudio.socketio.AckCallback;
+import com.corundumstudio.socketio.HandshakeData;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.Transport;
 import com.corundumstudio.socketio.namespace.Namespace;
@@ -30,16 +37,20 @@ import java.util.UUID;
 
 public class NamespaceClient implements SocketIOClient {
 
-    private final BaseClient baseClient;
+    private final MainBaseClient baseClient;
     private final Namespace namespace;
 
-    public NamespaceClient (BaseClient baseClient, Namespace namespace) {
+
+    public NamespaceClient (MainBaseClient baseClient, Namespace namespace) {
+
         this.baseClient = baseClient;
         this.namespace = namespace;
         namespace.addClient(this);
     }
 
-    public BaseClient getBaseClient () {
+
+    public MainBaseClient getBaseClient () {
+
         return baseClient;
     }
 
@@ -172,19 +183,43 @@ public class NamespaceClient implements SocketIOClient {
     }
 
     @Override
-    public <T> void joinRoom (T roomKey) {
-        namespace.joinRoom(roomKey, this);
+    public void joinRoom (String room) {
+        namespace.joinRoom(room, getSessionId());
     }
 
     @Override
-    public <T> void leaveRoom (T roomKey) {
-        namespace.leaveRoom(roomKey, this);
+    public void leaveRoom (String room) {
+        namespace.leaveRoom(room, getSessionId());
     }
 
     @Override
-    public Map<String, List<String>> getParams () {
-        return this.baseClient.getParams();
+    public void set (String key, String val) {
+        baseClient.getStore().set(key, val);
     }
 
+    @Override
+    public String get (String key) {
+        return baseClient.getStore().get(key);
+    }
+
+    @Override
+    public boolean has (String key) {
+        return baseClient.getStore().has(key);
+    }
+
+    @Override
+    public void del (String key) {
+        baseClient.getStore().del(key);
+    }
+
+    @Override
+    public List<String> getAllRooms () {
+        return namespace.getRooms(this);
+    }
+
+    @Override
+    public HandshakeData getHandshakeData () {
+        return baseClient.getHandshakeData();
+    }
 
 }

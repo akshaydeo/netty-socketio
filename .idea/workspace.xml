@@ -1,10 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="43611c17-7345-4d22-92be-103694f0305c" name="Default" comment="" />
+    <list default="true" id="43611c17-7345-4d22-92be-103694f0305c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/AuthorizationListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/pubsub/BaseStoreFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/pubsub/ConnectMessage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/pubsub/DisconnectMessage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/pubsub/DispatchMessage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/HandshakeData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/pubsub/HandshakeMessage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/HazelcastPubSubStore.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/HazelcastStore.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/HazelcastStoreFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/pubsub/JoinLeaveMessage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_hazelcast_hazelcast_3_1_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_hazelcast_hazelcast_client_3_1_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_pool_commons_pool_1_6.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_buffer_4_0_14_Final.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_4_0_14_Final.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_http_4_0_14_Final.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_common_4_0_14_Final.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_handler_4_0_14_Final.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_transport_4_0_14_Final.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__redis_clients_jedis_2_2_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/MemoryPubSubStore.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/MemoryStore.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/MemoryStoreFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/pubsub/PubSubListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/pubsub/PubSubMessage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/pubsub/PubSubStore.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/RedisPubSubStore.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/RedisStore.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/RedisStoreFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/StoreFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/SuccessAuthorizationListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/WrongUrlHandler.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_all_4_0_14_Final_SNAPSHOT.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOEncoder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/BaseClient.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_jmockit_jmockit_1_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_jmockit_jmockit_1_5.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/HeartbeatHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/HeartbeatHandler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/PacketListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/PacketListener.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/messages/XHRNewChannelMessage.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/store/Store.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/messages/XHRPacketMessage.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/messages/XHRSendPacketsMessage.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/JsonSupportWrapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/JsonSupportWrapper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/AckCallback.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/AckCallback.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/ack/AckManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/ack/AckManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/AckRequest.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/AckRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/AuthorizeHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/AuthorizeHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/BaseTransport.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/BaseTransport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/BroadcastOperations.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/BroadcastOperations.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/scheduler/CancelableScheduler.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/scheduler/CancelableScheduler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/Configuration.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/Configuration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/DecoderException.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/DecoderException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/Disconnectable.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/Disconnectable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/Encoder.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/Encoder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/EncoderHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/EncoderHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/Event.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/Event.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashSocketTransport.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashSocketTransport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/JacksonJsonSupport.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/JacksonJsonSupport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/JsonSupport.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/JsonSupport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/MainBaseClient.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/MainBaseClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/namespace/Namespace.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/namespace/Namespace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/NamespaceClient.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/NamespaceClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/namespace/NamespacesHub.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/namespace/NamespacesHub.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/Packet.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/Packet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/PacketHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/PacketHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/corundumstudio/socketio/handler/PacketHandlerTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/corundumstudio/socketio/handler/PacketHandlerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/messages/PacketsMessage.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/messages/PacketsMessage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/ResourceHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/ResourceHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOClient.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIONamespace.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIONamespace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOServer.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/WebSocketClient.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/WebSocketClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/WebSocketTransport.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/WebSocketTransport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingClient.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingTransport.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingTransport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/netty-socketio.iml" afterPath="$PROJECT_DIR$/netty-socketio.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="netty-socketio.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389804923695" ignored="false" />
+    <file path="/Dummy.txt" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389830766827" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/display_manager_sessions/DisplayManagerComponentSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202646" ignored="false" />
     <file path="/DisplayManagerComponentSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389472939662" ignored="false" />
     <file path="/SocketIOChannelInitializer.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385654559608" ignored="false" />
@@ -12,17 +95,17 @@
     <file path="/CommetClientSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389371174766" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/models/CommetMessageFactory.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389722879240" ignored="false" />
     <file path="/CommetMessageFactory.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385771612184" ignored="false" />
-    <file path="$PROJECT_DIR$/../transporter/netty4x/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389794846474" ignored="false" />
+    <file path="$PROJECT_DIR$/../transporter/netty4x/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389830370418" ignored="false" />
     <file path="/AuthorizeHandler.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385721779088" ignored="false" />
     <file path="$PROJECT_DIR$/../transporter/socketio/src/main/java/com/rc/transporter/socketio/SocketIoTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389813184225" ignored="false" />
     <file path="/SocketIoTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389813182227" ignored="false" />
-    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389787902129" ignored="false" />
+    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389831017979" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/logback.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202646" ignored="false" />
     <file path="/XHRPollingTransport.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389729492898" ignored="false" />
-    <file path="/XHRPollingClient.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386595478161" ignored="false" />
+    <file path="/XHRPollingClient.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389820321413" ignored="false" />
     <file path="/logback.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389729621197" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-simulator/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385743244297" ignored="false" />
-    <file path="/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389787902129" ignored="false" />
+    <file path="/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389832928549" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-simulator/src/main/java/com/appsurfer/node/v3/simulator/SocketIOSimulatedSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385744554207" ignored="false" />
     <file path="/SocketIOSimulatedSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385744529676" ignored="false" />
     <file path="/SocketIoTransportServerTest.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388023830894" ignored="false" />
@@ -42,8 +125,8 @@
     <file path="/CommetSessionManager.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389372229134" ignored="false" />
     <file path="/CommetComponentSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389371367610" ignored="false" />
     <file path="/NettyChannel.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385771500526" ignored="false" />
-    <file path="$PROJECT_DIR$/../transporter/socketio/src/main/java/com/rc/transporter/socketio/SocketIoChannel.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389794846474" ignored="false" />
-    <file path="/SocketIoChannel.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389728545724" ignored="false" />
+    <file path="$PROJECT_DIR$/../transporter/socketio/src/main/java/com/rc/transporter/socketio/SocketIoChannel.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389832732698" ignored="false" />
+    <file path="/SocketIoChannel.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389832727217" ignored="false" />
     <file path="$PROJECT_DIR$/../transporter/netty4x/src/main/java/com/rc/transporter/netty4x/DynamicNettyTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389816821745" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/graphite/SystemLoadReporter.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386014959491" ignored="false" />
     <file path="/SystemLoadReporter.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386014957956" ignored="false" />
@@ -62,7 +145,7 @@
     <file path="/a.dummy" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389277942263" ignored="false" />
     <file path="/WebSocketTransport.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1387996697712" ignored="false" />
     <file path="/BaseClient.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386595118712" ignored="false" />
-    <file path="/WebSocketClient.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386595159417" ignored="false" />
+    <file path="/WebSocketClient.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389820044276" ignored="false" />
     <file path="/NamespaceClient.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386596027808" ignored="false" />
     <file path="/SocketIOClient.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386596014973" ignored="false" />
     <file path="$MAVEN_REPOSITORY$/com/corundumstudio/socketio/netty-socketio/1.5.4-SNAPSHOT/netty-socketio-1.5.4-SNAPSHOT-sources.jar!/com/corundumstudio/socketio/SocketIOClient.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386596085699" ignored="false" />
@@ -80,8 +163,8 @@
     <file path="/SocketIoTransportServer.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1387997876599" ignored="false" />
     <file path="/SocketIOService.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389221412661" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-socket_io_session_manager/src/main/java/com/appsurfer/node/v3/socket_io/SocketIOService.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202646" ignored="false" />
-    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-socket_io_session_manager/src/main/java/com/appsurfer/node/v3/socket_io/transporter/AppSurferSocketIOTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389817180883" ignored="false" />
-    <file path="/AppSurferSocketIOTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389813262961" ignored="false" />
+    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-socket_io_session_manager/src/main/java/com/appsurfer/node/v3/socket_io/transporter/AppSurferSocketIOTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389833253535" ignored="false" />
+    <file path="/AppSurferSocketIOTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389833250898" ignored="false" />
     <file path="$MAVEN_REPOSITORY$/com/rainingclouds/socketio/1.1-BETA/socketio-1.1-BETA.jar!/com/rc/transporter/socketio/SocketIoTransportSession.class" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386606937460" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/display_manager_sessions/DisplayManagerClientSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202646" ignored="false" />
     <file path="/DisplayManagerClientSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1386607615961" ignored="false" />
@@ -173,7 +256,7 @@
     <file path="/InitState.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389218342578" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-as-clients/appsurfer-protocol-library/src/main/as/com.appsurfer.client.core/encoding/EncodingTight.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389218154871" ignored="false" />
     <file path="/EncodingTight.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388150147777" ignored="false" />
-    <file path="/fragment.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389567333130" ignored="false" />
+    <file path="/fragment.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389832588039" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/binary/SecureFlashBinaryClientSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388083806460" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-as-clients/appsurfer-facebook-client/src/main/as/com/appsurfer/facebook/AppSurfer.mxml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389817645127" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-as-clients/appsurfer-external-flash-client-white/src/main/as/com/appsurfer/web/AppSurfer.mxml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388452717383" ignored="false" />
@@ -210,8 +293,8 @@
     <file path="/SocketIOHttpUtil.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389806364493" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-as-clients/appsurfer-as-socketio-library/src/main/as/com/appsurfer/socketio/HttpChunkSocket.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389469100777" ignored="false" />
     <file path="/HttpChunkSocket.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389394615923" ignored="false" />
-    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-socket_io_session_manager/src/main/java/com/appsurfer/node/v3/socket_io/transporter/AppSurferSocketIOComboTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389813457218" ignored="false" />
-    <file path="/AppSurferSocketIOComboTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389813310180" ignored="false" />
+    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-socket_io_session_manager/src/main/java/com/appsurfer/node/v3/socket_io/transporter/AppSurferSocketIOComboTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389833281615" ignored="false" />
+    <file path="/AppSurferSocketIOComboTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389833264683" ignored="false" />
     <file path="/HttpCallErrorEvent.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388581524213" ignored="false" />
     <file path="/devdeploy.sh" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388593057238" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/devdeploy.sh" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389361051212" ignored="false" />
@@ -232,8 +315,8 @@
     <file path="/PolicyRequestHandler.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389224501268" ignored="false" />
     <file path="/SocketIOXHR.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389362609564" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/event_manager_sessions/EventManagerComponentConnectionSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389789892154" ignored="false" />
-    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-socket_io_session_manager/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389361051212" ignored="false" />
-    <file path="$PROJECT_DIR$/../transporter/socketio/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389794846474" ignored="false" />
+    <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-socket_io_session_manager/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389833166137" ignored="false" />
+    <file path="$PROJECT_DIR$/../transporter/socketio/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389830987518" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/event_manager_sessions/EventManagerClientSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389732202986" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/components/SessionCatalog.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389722879239" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/recovery/RecoverySession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389284172642" ignored="false" />
@@ -351,8 +434,15 @@
     <file path="/UpdateDeviceSetupStatusTask.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389791951280" ignored="false" />
     <file path="$PROJECT_DIR$/../transporter/netty4x/src/main/java/com/rc/transporter/netty4x/DynamicTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389794846474" ignored="false" />
     <file path="/RawSetupRoutine.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389810793179" ignored="false" />
-    <file path="$MAVEN_REPOSITORY$/com/rainingclouds/socketio/1.2-BETA/socketio-1.2-BETA.jar!/com/rc/transporter/socketio/SocketIoTransportSession.class" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389819017466" ignored="false" />
+    <file path="$MAVEN_REPOSITORY$/com/rainingclouds/socketio/1.2-BETA/socketio-1.2-BETA.jar!/com/rc/transporter/socketio/SocketIoTransportSession.class" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389830499475" ignored="false" />
     <file path="$MAVEN_REPOSITORY$/com/rainingclouds/socketio/1.2-BETA/socketio-1.2-BETA.jar!/logback.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389819017466" ignored="false" />
+    <file path="/MainBaseClient.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389819605089" ignored="false" />
+    <file path="/opt/java/src.zip!/java/util/concurrent/ConcurrentHashMap.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389829396860" ignored="false" />
+    <file path="$MAVEN_REPOSITORY$/com/rainingclouds/socketio/1.3-BETA/socketio-1.3-BETA.pom" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389833126482" ignored="false" />
+    <file path="$MAVEN_REPOSITORY$/com/rainingclouds/socketio/1.3-BETA/socketio-1.3-BETA.jar!/com/rc/transporter/socketio/SocketIoTransportSession.class" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389832920146" ignored="false" />
+    <file path="$MAVEN_REPOSITORY$/com/rainingclouds/socketio/1.3-BETA/socketio-1.3-BETA.jar!/com/rc/transporter/socketio/SocketIoChannel.class" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389832920146" ignored="false" />
+    <file path="$PROJECT_DIR$/../appsurfer-java-node/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389833009430" ignored="false" />
+    <file path="/socketio-1.3-BETA.pom" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389833125056" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -367,6 +457,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -401,7 +492,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -410,46 +500,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DisconnectListener.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/listener/DisconnectListener.java">
+      <file leaf-file-name="AckManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/ack/AckManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="17" selection-start="716" selection-end="716" vertical-scroll-proportion="0.0">
+            <state line="35" column="13" selection-start="1363" selection-end="1363" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SocketIONamespace.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIONamespace.java">
+      <file leaf-file-name="AckSchedulerKey.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/ack/AckSchedulerKey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="17" selection-start="717" selection-end="717" vertical-scroll-proportion="0.0">
+            <state line="21" column="13" selection-start="739" selection-end="739" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Namespace.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/namespace/Namespace.java">
+      <file leaf-file-name="AnnotationScanner.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/annotation/AnnotationScanner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="140" column="24" selection-start="5605" selection-end="5605" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NamespaceClient.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/NamespaceClient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="120" column="18" selection-start="3604" selection-end="3604" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PacketListener.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/PacketListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="24" selection-start="2933" selection-end="2933" vertical-scroll-proportion="0.0">
+            <state line="22" column="17" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -458,43 +530,61 @@
       <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="7" column="37" selection-start="354" selection-end="387" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FlashPolicyHandler.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java">
+      <file leaf-file-name="SocketIOClient.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="21" selection-start="1535" selection-end="1535" vertical-scroll-proportion="0.36774194">
+            <state line="21" column="22" selection-start="790" selection-end="790" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseClient.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/BaseClient.java">
+      <file leaf-file-name="SocketIOServer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="95" column="42" selection-start="3353" selection-end="3353" vertical-scroll-proportion="0.0">
+            <state line="38" column="13" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="XHRPollingTransport.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingTransport.java">
+      <file leaf-file-name="SocketIONamespace.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIONamespace.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="140" column="30" selection-start="5815" selection-end="5815" vertical-scroll-proportion="0.0">
+            <state line="23" column="17" selection-start="750" selection-end="750" vertical-scroll-proportion="0.20876288">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SchedulerKey.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/scheduler/SchedulerKey.java">
+      <file leaf-file-name="SocketIOChannelInitializer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="49" selection-start="750" selection-end="750" vertical-scroll-proportion="0.0">
+            <state line="66" column="13" selection-start="2646" selection-end="2646" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="XHRPollingClient.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="46" column="8" selection-start="1803" selection-end="1803" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebSocketClient.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/WebSocketClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="13" selection-start="1180" selection-end="1180" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -518,20 +608,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/AuthorizeHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/WebSocketClient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingClient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/BaseClient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOClient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/NamespaceClient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/PacketHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/WebSocketTransport.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOEncoder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/namespace/Namespace.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingTransport.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/JacksonJsonSupport.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOServer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/AuthorizeHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/MainBaseClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/NamespaceClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/WebSocketClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/WebSocketTransport.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingTransport.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/namespace/Namespace.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/EncoderHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/PacketHandler.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOClient.java" />
       </list>
     </option>
   </component>
@@ -548,8 +640,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1600" />
-    <option name="height" value="874" />
+    <option name="x" value="-1" />
+    <option name="width" value="1602" />
+    <option name="height" value="875" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -973,8 +1066,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -989,19 +1082,6 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -1030,6 +1110,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1084,14 +1177,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1600" height="874" extended-state="6" />
+    <frame x="-1" y="0" width="1602" height="875" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1103,7 +1196,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916147" sideWeight="0.68362284" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32875" sideWeight="0.68362284" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1168,117 +1261,130 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingClient.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/namespace/Namespace.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="15" selection-start="1745" selection-end="1745" vertical-scroll-proportion="0.0">
+        <state line="166" column="11" selection-start="6407" selection-end="6407" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="n#!!doc" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#2597#2619#0" expanded="true" />
+            <element signature="e#2972#3006#0" expanded="true" />
+            <element signature="e#3100#3122#0" expanded="true" />
+            <element signature="e#3211#3228#0" expanded="true" />
+            <element signature="e#3323#3343#0" expanded="true" />
+            <element signature="e#3463#3484#0" expanded="true" />
+            <element signature="e#11627#11643#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/EncoderHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="0" selection-start="2153" selection-end="2153" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/AuthorizeHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="13" selection-start="2550" selection-end="2550" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4885#4907#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/HeartbeatHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="13" selection-start="1211" selection-end="1211" vertical-scroll-proportion="0.0">
+          <folding>
             <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/BaseTransport.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="22" selection-start="968" selection-end="968" vertical-scroll-proportion="0.0">
+        <state line="31" column="0" selection-start="1123" selection-end="1123" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/ClientOperations.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/PacketHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="9" selection-start="860" selection-end="860" vertical-scroll-proportion="0.0">
+        <state line="68" column="0" selection-start="2691" selection-end="2691" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/BroadcastOperations.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/ack/AckManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="23" selection-start="802" selection-end="802" vertical-scroll-proportion="0.0">
+        <state line="35" column="13" selection-start="1363" selection-end="1363" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOClient.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/ack/AckSchedulerKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="40" selection-start="913" selection-end="913" vertical-scroll-proportion="0.0">
+        <state line="21" column="13" selection-start="739" selection-end="739" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOServer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/annotation/AnnotationScanner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="27" selection-start="1912" selection-end="1912" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/listener/DisconnectListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="17" selection-start="716" selection-end="716" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIONamespace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="17" selection-start="717" selection-end="717" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/namespace/Namespace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="140" column="24" selection-start="5605" selection-end="5605" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/NamespaceClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="18" selection-start="3604" selection-end="3604" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/PacketListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="24" selection-start="2933" selection-end="2933" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/BaseClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="42" selection-start="3353" selection-end="3353" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingTransport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="140" column="30" selection-start="5815" selection-end="5815" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/scheduler/SchedulerKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="49" selection-start="750" selection-end="750" vertical-scroll-proportion="0.0">
+        <state line="22" column="17" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="7" column="37" selection-start="354" selection-end="387" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="21" selection-start="1535" selection-end="1535" vertical-scroll-proportion="0.36774194">
+        <state line="66" column="13" selection-start="2646" selection-end="2646" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/XHRPollingClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="8" selection-start="1803" selection-end="1803" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/WebSocketClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="13" selection-start="1180" selection-end="1180" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="22" selection-start="790" selection-end="790" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="13" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIONamespace.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="17" selection-start="750" selection-end="750" vertical-scroll-proportion="0.20876288">
           <folding />
         </state>
       </provider>

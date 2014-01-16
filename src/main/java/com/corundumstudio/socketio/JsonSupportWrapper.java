@@ -13,23 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.corundumstudio.socketio.parser;
+package com.corundumstudio.socketio;
 
+import com.corundumstudio.socketio.parser.AckArgs;
+import com.corundumstudio.socketio.parser.JsonSupport;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
-
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonSupportWrapper implements JsonSupport {
+import java.io.IOException;
+
+class JsonSupportWrapper implements JsonSupport {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final JsonSupport delegate;
 
-    public JsonSupportWrapper(JsonSupport delegate) {
+    JsonSupportWrapper(JsonSupport delegate) {
         this.delegate = delegate;
     }
 
@@ -93,6 +94,11 @@ public class JsonSupportWrapper implements JsonSupport {
 
     public void removeEventMapping(String eventName) {
         delegate.removeEventMapping(eventName);
+    }
+
+    @Override
+    public <T> T readValue(String src, Class<T> valueType) throws IOException {
+        return delegate.readValue(src, valueType);
     }
 
 

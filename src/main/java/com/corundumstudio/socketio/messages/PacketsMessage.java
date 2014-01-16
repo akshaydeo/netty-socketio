@@ -17,19 +17,19 @@ package com.corundumstudio.socketio.messages;
 
 import io.netty.buffer.ByteBuf;
 
-import com.corundumstudio.socketio.transport.BaseClient;
+import com.corundumstudio.socketio.transport.MainBaseClient;
 
 public class PacketsMessage {
 
-    private final BaseClient client;
+    private final MainBaseClient client;
     private final ByteBuf content;
 
-    public PacketsMessage(BaseClient client, ByteBuf content) {
+    public PacketsMessage(MainBaseClient client, ByteBuf content) {
         this.client = client;
         this.content = content;
     }
 
-    public BaseClient getClient() {
+    public MainBaseClient getClient() {
         return client;
     }
 

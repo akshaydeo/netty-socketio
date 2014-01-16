@@ -34,48 +34,63 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import com.corundumstudio.socketio.DisconnectableHub;
+import com.corundumstudio.socketio.HandshakeData;
+import com.corundumstudio.socketio.SocketIOClient;
+import com.corundumstudio.socketio.Transport;
+import com.corundumstudio.socketio.ack.AckManager;
+import com.corundumstudio.socketio.namespace.Namespace;
+import com.corundumstudio.socketio.parser.Packet;
+import com.corundumstudio.socketio.parser.PacketType;
+import com.corundumstudio.socketio.store.Store;
+import com.corundumstudio.socketio.store.StoreFactory;
+
+
 /**
  * Base class for main client.
- *
+ * <p/>
  * Each main client can have multiple namespace clients, when all namespace
  * clients has disconnected then main client disconnects too.
- *
- *
  */
-public abstract class BaseClient {
+public abstract class MainBaseClient {
 
-    private final ConcurrentMap<Namespace, SocketIOClient> namespaceClients = new ConcurrentHashMap<Namespace, SocketIOClient>();
+    private final ConcurrentMap<Namespace, SocketIOClient> namespaceClients = new
+            ConcurrentHashMap<Namespace, SocketIOClient>();
+    private final Store store;
 
     private final DisconnectableHub disconnectable;
     private final AckManager ackManager;
     private final UUID sessionId;
     private final Transport transport;
-    private final Map<String, List<String>> params;
     private Channel channel;
+    private final HandshakeData handshakeData;
 
-    public BaseClient(UUID sessionId, AckManager ackManager, DisconnectableHub disconnectable,
-            Transport transport, Map<String, List<String>> params) {
+
+    public MainBaseClient (UUID sessionId, AckManager ackManager, DisconnectableHub disconnectable,
+            Transport transport, StoreFactory storeFactory, HandshakeData handshakeData) {
+
         this.sessionId = sessionId;
         this.ackManager = ackManager;
         this.disconnectable = disconnectable;
         this.transport = transport;
-        this.params = params;
+        this.store = storeFactory.create(sessionId);
+        this.handshakeData = handshakeData;
     }
 
-    public Transport getTransport() {
+    public Transport getTransport () {
         return transport;
     }
 
-    public abstract ChannelFuture send(Packet packet);
+    public abstract ChannelFuture send (Packet packet);
 
-    public void removeChildClient(SocketIOClient client) {
+    public void removeChildClient (SocketIOClient client) {
         namespaceClients.remove((Namespace) client.getNamespace());
         if (namespaceClients.isEmpty()) {
             disconnectable.onDisconnect(this);
         }
     }
 
-    public SocketIOClient getChildClient(Namespace namespace) {
+    public SocketIOClient getChildClient (Namespace namespace) {
         SocketIOClient client = namespaceClients.get(namespace);
         if (client == null) {
             client = new NamespaceClient(this, namespace);
@@ -87,45 +102,50 @@ public abstract class BaseClient {
         return client;
     }
 
-    public Collection<SocketIOClient> getAllChildClients() {
+    public Collection<SocketIOClient> getAllChildClients () {
         return namespaceClients.values();
     }
 
-    public void onChannelDisconnect() {
+    public void onChannelDisconnect () {
         for (SocketIOClient client : getAllChildClients()) {
             ((NamespaceClient) client).onDisconnect();
         }
     }
 
-    public AckManager getAckManager() {
+    public HandshakeData getHandshakeData () {
+        return handshakeData;
+    }
+
+    public AckManager getAckManager () {
         return ackManager;
     }
 
-    public UUID getSessionId() {
+    public UUID getSessionId () {
         return sessionId;
     }
 
-    public SocketAddress getRemoteAddress() {
+    public SocketAddress getRemoteAddress () {
         return channel.remoteAddress();
     }
 
-    public void disconnect() {
+    public void disconnect () {
         ChannelFuture future = send(new Packet(PacketType.DISCONNECT));
         future.addListener(ChannelFutureListener.CLOSE);
 
         onChannelDisconnect();
     }
 
-    Channel getChannel() {
+    Channel getChannel () {
         return channel;
     }
 
-    public Map<String, List<String>> getParams(){
-        return this.params;
+
+    void setChannel (Channel channel) {
+        this.channel = channel;
     }
 
-    void setChannel(Channel channel) {
-        this.channel = channel;
+    public Store getStore () {
+        return store;
     }
 
 }

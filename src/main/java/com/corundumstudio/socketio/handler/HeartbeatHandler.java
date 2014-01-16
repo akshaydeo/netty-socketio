@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.corundumstudio.socketio;
+package com.corundumstudio.socketio.handler;
 
-import java.util.concurrent.TimeUnit;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.corundumstudio.socketio.Configuration;
+import com.corundumstudio.socketio.Disconnectable;
 import com.corundumstudio.socketio.parser.Packet;
 import com.corundumstudio.socketio.parser.PacketType;
 import com.corundumstudio.socketio.scheduler.CancelableScheduler;
 import com.corundumstudio.socketio.scheduler.SchedulerKey;
 import com.corundumstudio.socketio.scheduler.SchedulerKey.Type;
-import com.corundumstudio.socketio.transport.BaseClient;
+import com.corundumstudio.socketio.transport.MainBaseClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.TimeUnit;
 
 public class HeartbeatHandler implements Disconnectable {
 
@@ -39,7 +40,7 @@ public class HeartbeatHandler implements Disconnectable {
         this.scheduler = scheduler;
     }
 
-    public void onHeartbeat(final BaseClient client) {
+    public void onHeartbeat(final MainBaseClient client) {
         if (!configuration.isHeartbeatsEnabled()) {
             return;
         }
@@ -55,7 +56,7 @@ public class HeartbeatHandler implements Disconnectable {
         }, configuration.getHeartbeatInterval(), TimeUnit.SECONDS);
     }
 
-    private void scheduleClientHeartbeatCheck(final BaseClient client, SchedulerKey key) {
+    private void scheduleClientHeartbeatCheck(final MainBaseClient client, SchedulerKey key) {
         // cancel previous heartbeat check
         scheduler.cancel(key);
         scheduler.schedule(key, new Runnable() {
@@ -67,7 +68,7 @@ public class HeartbeatHandler implements Disconnectable {
     }
 
     @Override
-    public void onDisconnect(BaseClient client) {
+    public void onDisconnect(MainBaseClient client) {
         scheduler.cancel(new SchedulerKey(Type.HEARBEAT_TIMEOUT, client.getSessionId()));
     }
 

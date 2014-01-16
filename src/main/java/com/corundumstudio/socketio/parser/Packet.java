@@ -15,22 +15,24 @@
  */
 package com.corundumstudio.socketio.parser;
 
-import io.netty.util.CharsetUtil;
-
+import java.io.Serializable;
+import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
 
-public class Packet {
+public class Packet implements Serializable {
+
+    private static final long serialVersionUID = 4560159536486711426L;
 
     public static final char DELIMITER = '\ufffd';
-    public static final byte[] DELIMITER_BYTES = new String(new char[] {DELIMITER}).getBytes(CharsetUtil.UTF_8);
+    public static final byte[] DELIMITER_BYTES = new String(new char[] {DELIMITER}).getBytes(Charset.forName("UTF-8"));
     public static final byte SEPARATOR = ':';
 
     public static final String ACK_DATA = "data";
 
     public static final Packet NULL_INSTANCE = new Packet(null);
 
-    private final PacketType type;
+    private PacketType type;
     private List<?> args = Collections.emptyList();
     private String qs;
     private Object ack;
@@ -42,6 +44,9 @@ public class Packet {
 
     private ErrorReason reason;
     private ErrorAdvice advice;
+
+    protected Packet() {
+    }
 
     public Packet(PacketType type) {
         super();
@@ -146,8 +151,13 @@ public class Packet {
         return ACK_DATA.equals(getAck()) && getType().equals(PacketType.EVENT);
     }
 
-    public boolean isAck() {
+    public boolean isAckRequested() {
         return getId() != null && (isEventAck() || isJsonAck());
+    }
+
+    @Override
+    public String toString() {
+        return "Packet [type=" + type + ", args=" + args + ", id=" + id + "]";
     }
 
 }

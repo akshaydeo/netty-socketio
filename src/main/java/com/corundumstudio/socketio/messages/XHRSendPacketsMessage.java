@@ -15,21 +15,22 @@
  */
 package com.corundumstudio.socketio.messages;
 
+import java.util.Queue;
 import java.util.UUID;
 
 import com.corundumstudio.socketio.parser.Packet;
 
-public class XHRPacketMessage extends HttpMessage {
+public class XHRSendPacketsMessage extends HttpMessage {
 
-    private final Packet packet;
+    private final Queue<Packet> packetQueue;
 
-    public XHRPacketMessage(UUID sessionId, String origin, Packet packet) {
+    public XHRSendPacketsMessage(UUID sessionId, String origin, Queue<Packet> packetQueue) {
         super(origin, sessionId);
-        this.packet = packet;
+        this.packetQueue = packetQueue;
     }
 
-    public Packet getPacket() {
-        return packet;
+    public Queue<Packet> getPacketQueue() {
+        return packetQueue;
     }
 
 }

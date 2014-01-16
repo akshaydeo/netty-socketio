@@ -16,15 +16,15 @@
 package com.corundumstudio.socketio.transport;
 
 import io.netty.channel.ChannelPipeline;
-
 import io.netty.channel.ChannelHandler.Sharable;
 
 import com.corundumstudio.socketio.DisconnectableHub;
-import com.corundumstudio.socketio.HeartbeatHandler;
 import com.corundumstudio.socketio.SocketIOChannelInitializer;
 import com.corundumstudio.socketio.Transport;
 import com.corundumstudio.socketio.ack.AckManager;
 import com.corundumstudio.socketio.handler.AuthorizeHandler;
+import com.corundumstudio.socketio.handler.HeartbeatHandler;
+import com.corundumstudio.socketio.store.StoreFactory;
 
 @Sharable
 public class FlashSocketTransport extends WebSocketTransport {
@@ -33,8 +33,8 @@ public class FlashSocketTransport extends WebSocketTransport {
 
     public FlashSocketTransport(String connectPath, boolean isSsl, AckManager ackManager,
             DisconnectableHub disconnectable, AuthorizeHandler authorizeHandler,
-            HeartbeatHandler heartbeatHandler) {
-        super(connectPath, isSsl, ackManager, disconnectable, authorizeHandler, heartbeatHandler);
+            HeartbeatHandler heartbeatHandler, StoreFactory storeFactory) {
+        super(connectPath, isSsl, ackManager, disconnectable, authorizeHandler, heartbeatHandler, storeFactory);
         path = connectPath + NAME;
     }
 

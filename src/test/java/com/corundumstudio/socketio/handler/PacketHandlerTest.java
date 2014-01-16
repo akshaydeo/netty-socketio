@@ -26,7 +26,6 @@ import junit.framework.Assert;
 import mockit.Mocked;
 
 import com.corundumstudio.socketio.Configuration;
-import com.corundumstudio.socketio.PacketListener;
 import com.corundumstudio.socketio.transport.NamespaceClient;
 
 import io.netty.buffer.ByteBuf;
@@ -48,18 +47,18 @@ import com.corundumstudio.socketio.parser.JacksonJsonSupport;
 import com.corundumstudio.socketio.parser.JsonSupport;
 import com.corundumstudio.socketio.parser.Packet;
 import com.corundumstudio.socketio.parser.PacketType;
-import com.corundumstudio.socketio.transport.BaseClient;
+import com.corundumstudio.socketio.transport.MainBaseClient;
 
 public class PacketHandlerTest {
 
     private JsonSupport map = new JacksonJsonSupport(new Configuration());
     private Decoder decoder = new Decoder(map, new AckManager(null));
     private Encoder encoder = new Encoder(new Configuration(), map);
-    private NamespacesHub namespacesHub = new NamespacesHub(map);
+    private NamespacesHub namespacesHub = new NamespacesHub(map, null);
     @Mocked
     private Channel channel;
     @Mocked
-    private BaseClient client;
+    private MainBaseClient client;
     private final AtomicInteger invocations = new AtomicInteger();
 
     @Before

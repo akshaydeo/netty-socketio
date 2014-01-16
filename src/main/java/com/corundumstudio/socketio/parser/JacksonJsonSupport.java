@@ -22,6 +22,14 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.Module;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -178,7 +186,15 @@ public class JacksonJsonSupport implements JsonSupport {
     private final AckArgsDeserializer ackArgsDeserializer = new AckArgsDeserializer();
 
     public JacksonJsonSupport(Configuration configuration) {
+        this(configuration, null);
+    }
+
+    public JacksonJsonSupport(Configuration configuration, Module... modules) {
         this.configuration = configuration;
+
+        if (modules != null && modules.length > 0) {
+            objectMapper.registerModules(modules);
+        }
         init(objectMapper);
     }
 
@@ -237,5 +253,11 @@ public class JacksonJsonSupport implements JsonSupport {
     public String writeValueAsString(Object value) throws IOException {
         return objectMapper.writeValueAsString(value);
     }
+
+    @Override
+    public <T> T readValue(String src, Class<T> valueType) throws IOException {
+        return objectMapper.readValue(src, valueType);
+    }
+
 
 }

@@ -52,6 +52,28 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.corundumstudio.socketio.Configuration;
+import com.corundumstudio.socketio.DisconnectableHub;
+import com.corundumstudio.socketio.HandshakeData;
+import com.corundumstudio.socketio.SocketIOClient;
+import com.corundumstudio.socketio.Transport;
+import com.corundumstudio.socketio.ack.AckManager;
+import com.corundumstudio.socketio.handler.AuthorizeHandler;
+import com.corundumstudio.socketio.messages.PacketsMessage;
+import com.corundumstudio.socketio.messages.XHRErrorMessage;
+import com.corundumstudio.socketio.messages.XHROutMessage;
+import com.corundumstudio.socketio.parser.ErrorAdvice;
+import com.corundumstudio.socketio.parser.ErrorReason;
+import com.corundumstudio.socketio.parser.Packet;
+import com.corundumstudio.socketio.parser.PacketType;
+import com.corundumstudio.socketio.scheduler.CancelableScheduler;
+import com.corundumstudio.socketio.scheduler.SchedulerKey;
+import com.corundumstudio.socketio.scheduler.SchedulerKey.Type;
+
+
 @Sharable
 public class XHRPollingTransport extends BaseTransport {
 
@@ -107,13 +129,13 @@ public class XHRPollingTransport extends BaseTransport {
 
             String origin = req.headers().get(HttpHeaders.Names.ORIGIN);
             if (queryDecoder.parameters().containsKey("disconnect")) {
-                BaseClient client = sessionId2Client.get(sessionId);
+                MainBaseClient client = sessionId2Client.get(sessionId);
                 client.onChannelDisconnect();
                 ctx.channel().write(new XHROutMessage(origin, sessionId));
             } else if (HttpMethod.POST.equals(req.getMethod())) {
                 onPost(sessionId, ctx, origin, req.content());
             } else if (HttpMethod.GET.equals(req.getMethod())) {
-                onGet(sessionId, ctx, origin, queryDecoder);
+                onGet(sessionId, ctx, origin);
             }
         } else {
             log.warn("Wrong {} method request path: {}, from ip: {}. Channel closed!",
@@ -171,17 +193,18 @@ public class XHRPollingTransport extends BaseTransport {
         ctx.pipeline().fireChannelRead(new PacketsMessage(client, content));
     }
 
-    private void onGet (final UUID sessionId, final ChannelHandlerContext ctx, final String origin,
-            final QueryStringDecoder queryDecoder) {
-        if (!authorizeHandler.isSessionAuthorized(sessionId)) {
-            log.trace("Session is not authorized");
+
+    private void onGet (UUID sessionId, ChannelHandlerContext ctx, String origin) {
+        HandshakeData data = authorizeHandler.getHandshakeData(sessionId);
+        if (data == null) {
             sendError(ctx, origin, sessionId);
             return;
         }
 
         XHRPollingClient client = (XHRPollingClient) sessionId2Client.get(sessionId);
         if (client == null) {
-            client = createClient(origin, ctx.channel(), sessionId, queryDecoder.parameters());
+
+            client = createClient(origin, ctx.channel(), sessionId, data);
         }
 
         client.bindChannel(ctx.channel(), origin);
@@ -190,10 +213,11 @@ public class XHRPollingTransport extends BaseTransport {
         scheduleNoop(sessionId);
     }
 
+
     private XHRPollingClient createClient (String origin, Channel channel, UUID sessionId,
-            Map<String, List<String>> params) {
+            HandshakeData data) {
         XHRPollingClient client = new XHRPollingClient(ackManager, disconnectable, sessionId,
-                Transport.XHRPOLLING, params);
+                Transport.XHRPOLLING, configuration.getStoreFactory(), data);
 
         sessionId2Client.put(sessionId, client);
         client.bindChannel(channel, origin);
@@ -212,7 +236,9 @@ public class XHRPollingTransport extends BaseTransport {
     }
 
     @Override
-    public void onDisconnect (BaseClient client) {
+
+    public void onDisconnect (MainBaseClient client) {
+
         if (client instanceof XHRPollingClient) {
             log.debug("sending disconnect to xhr client");
             UUID sessionId = client.getSessionId();

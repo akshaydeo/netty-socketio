@@ -33,6 +33,9 @@ import org.slf4j.LoggerFactory;
 import java.net.InetSocketAddress;
 import java.util.Collection;
 
+/**
+ * Fully thread-safe.
+ */
 public class SocketIOServer implements ClientListeners {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -48,14 +51,14 @@ public class SocketIOServer implements ClientListeners {
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
 
-    public SocketIOServer(Configuration configuration) {
+    public SocketIOServer (Configuration configuration) {
         this.configuration = configuration;
         this.configCopy = new Configuration(configuration);
-        namespacesHub = new NamespacesHub(this.configCopy.getJsonSupport());
+        namespacesHub = new NamespacesHub(configCopy.getJsonSupport(), configCopy.getStoreFactory());
         mainNamespace = addNamespace(Namespace.DEFAULT_NAME);
     }
 
-    public void setPipelineFactory(SocketIOChannelInitializer pipelineFactory) {
+    public void setPipelineFactory (SocketIOChannelInitializer pipelineFactory) {
         this.pipelineFactory = pipelineFactory;
     }
 
@@ -64,34 +67,34 @@ public class SocketIOServer implements ClientListeners {
      *
      * @return clients collection
      */
-    public Collection<SocketIOClient> getAllClients() {
+    public Collection<SocketIOClient> getAllClients () {
         return pipelineFactory.getAllClients();
     }
 
-    public BroadcastOperations getBroadcastOperations() {
+    public BroadcastOperations getBroadcastOperations () {
         return getBroadcastOperations(pipelineFactory.getAllClients());
     }
 
     /**
      * Get broadcast operations for clients within
-     * room by <code>roomKey</code>
+     * room by <code>room</code> name
      *
-     * @param roomKey - any object with correct hashcode & equals implementation
+     * @param room
      * @return
      */
-    public <T> BroadcastOperations getRoomOperations(T roomKey) {
-        Iterable<SocketIOClient> clients = namespacesHub.getRoomClients(roomKey);
-        return new BroadcastOperations(clients);
+    public BroadcastOperations getRoomOperations (String room) {
+        Iterable<SocketIOClient> clients = namespacesHub.getRoomClients(room);
+        return new BroadcastOperations(clients, configCopy.getStoreFactory());
     }
 
-    public BroadcastOperations getBroadcastOperations(Iterable<SocketIOClient> clients) {
-        return new BroadcastOperations(clients);
+    public BroadcastOperations getBroadcastOperations (Iterable<SocketIOClient> clients) {
+        return new BroadcastOperations(clients, configCopy.getStoreFactory());
     }
 
     /**
      * Start server
      */
-    public void start(final ChannelFutureListener disconnectListener) throws InterruptedException{
+    public void start (final ChannelFutureListener disconnectListener) throws InterruptedException {
         initGroups();
         pipelineFactory.start(configCopy, namespacesHub);
         ServerBootstrap b = new ServerBootstrap();
@@ -105,10 +108,12 @@ public class SocketIOServer implements ClientListeners {
         if (configCopy.getHostname() != null) {
             addr = new InetSocketAddress(configCopy.getHostname(), configCopy.getPort());
         }
+        log.info("Session store / pubsub factory used: {}", configCopy.getStoreFactory());
+        log.info("SocketIO server started at port: {}", configCopy.getPort());
         b.bind(addr).sync().channel().closeFuture().sync().addListener(disconnectListener);
     }
 
-    protected void initGroups() {
+    protected void initGroups () {
         bossGroup = new NioEventLoopGroup(configCopy.getBossThreads());
         workerGroup = new NioEventLoopGroup(configCopy.getWorkerThreads());
     }
@@ -116,20 +121,22 @@ public class SocketIOServer implements ClientListeners {
     /**
      * Stop server
      */
-    public void stop() {
-        bossGroup.shutdownGracefully();
-        workerGroup.shutdownGracefully();
+    public void stop () {
+        bossGroup.shutdownGracefully().syncUninterruptibly();
+        workerGroup.shutdownGracefully().syncUninterruptibly();
+
+        pipelineFactory.stop();
     }
 
-    public SocketIONamespace addNamespace(String name) {
+    public SocketIONamespace addNamespace (String name) {
         return namespacesHub.create(name);
     }
 
-    public SocketIONamespace getNamespace(String name) {
+    public SocketIONamespace getNamespace (String name) {
         return namespacesHub.get(name);
     }
 
-    public void removeNamespace(String name) {
+    public void removeNamespace (String name) {
         namespacesHub.remove(name);
     }
 
@@ -140,42 +147,42 @@ public class SocketIOServer implements ClientListeners {
      *
      * @return Configuration object
      */
-    public Configuration getConfiguration() {
+    public Configuration getConfiguration () {
         return configuration;
     }
 
     @Override
-    public <T> void addEventListener(String eventName, Class<T> eventClass, DataListener<T> listener) {
+    public <T> void addEventListener (String eventName, Class<T> eventClass, DataListener<T> listener) {
         mainNamespace.addEventListener(eventName, eventClass, listener);
     }
 
     @Override
-    public <T> void addJsonObjectListener(Class<T> clazz, DataListener<T> listener) {
+    public <T> void addJsonObjectListener (Class<T> clazz, DataListener<T> listener) {
         mainNamespace.addJsonObjectListener(clazz, listener);
     }
 
     @Override
-    public void addDisconnectListener(DisconnectListener listener) {
+    public void addDisconnectListener (DisconnectListener listener) {
         mainNamespace.addDisconnectListener(listener);
     }
 
     @Override
-    public void addConnectListener(ConnectListener listener) {
+    public void addConnectListener (ConnectListener listener) {
         mainNamespace.addConnectListener(listener);
     }
 
     @Override
-    public void addMessageListener(DataListener<String> listener) {
+    public void addMessageListener (DataListener<String> listener) {
         mainNamespace.addMessageListener(listener);
     }
 
     @Override
-    public void addListeners(Object listeners) {
+    public void addListeners (Object listeners) {
         mainNamespace.addListeners(listeners);
     }
 
     @Override
-    public void addListeners(Object listeners, Class listenersClass) {
+    public void addListeners (Object listeners, Class listenersClass) {
         mainNamespace.addListeners(listeners, listenersClass);
     }
 

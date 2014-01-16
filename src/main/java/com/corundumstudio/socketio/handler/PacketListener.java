@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.corundumstudio.socketio;
+package com.corundumstudio.socketio.handler;
 
 import java.util.Collections;
 
+import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.ack.AckManager;
 import com.corundumstudio.socketio.namespace.Namespace;
 import com.corundumstudio.socketio.namespace.NamespacesHub;
@@ -38,15 +39,15 @@ public class PacketListener {
     public void onPacket(Packet packet, NamespaceClient client) {
         final AckRequest ackRequest = new AckRequest(packet, client);
 
-        if (packet.isAck()) {
+        if (packet.isAckRequested()) {
             ackManager.initAckIndex(client.getSessionId(), packet.getId());
         }
 
         switch (packet.getType()) {
         case CONNECT: {
-        	Namespace namespace = namespacesHub.get(packet.getEndpoint());
-        	namespace.onConnect(client);
-        	// send connect handshake back to client
+            Namespace namespace = namespacesHub.get(packet.getEndpoint());
+            namespace.onConnect(client);
+            // send connect handshake packet back to client
             client.send(packet);
             break;
         }
@@ -84,6 +85,9 @@ public class PacketListener {
 
         case DISCONNECT:
             client.onDisconnect();
+            break;
+
+        default:
             break;
         }
 

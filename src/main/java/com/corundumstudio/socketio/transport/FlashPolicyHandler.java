@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 @Sharable
 public class FlashPolicyHandler extends ChannelInboundHandlerAdapter {
 
+
     private static final Logger log = LoggerFactory.getLogger(FlashPolicyHandler.class);
 
     private final ByteBuf requestBuffer = Unpooled.copiedBuffer("<policy-file-request/>", CharsetUtil.UTF_8);
@@ -43,6 +44,7 @@ public class FlashPolicyHandler extends ChannelInboundHandlerAdapter {
                     + "\t<allow-access-from domain='da1e79qj82tlx.cloudfront.net' to-ports='*' />\n"
                     + "\t<allow-http-request-headers-from domain=\"*\" headers=\"*\"/>\n"
                     + "</cross-domain-policy>", CharsetUtil.UTF_8);
+
 
     @Override
     public void channelRead (ChannelHandlerContext ctx, Object msg) throws Exception {

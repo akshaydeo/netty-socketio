@@ -38,6 +38,21 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.corundumstudio.socketio.DisconnectableHub;
+import com.corundumstudio.socketio.HandshakeData;
+import com.corundumstudio.socketio.SocketIOClient;
+import com.corundumstudio.socketio.SocketIOChannelInitializer;
+import com.corundumstudio.socketio.Transport;
+import com.corundumstudio.socketio.ack.AckManager;
+import com.corundumstudio.socketio.handler.AuthorizeHandler;
+import com.corundumstudio.socketio.handler.HeartbeatHandler;
+import com.corundumstudio.socketio.messages.PacketsMessage;
+import com.corundumstudio.socketio.store.StoreFactory;
+
+
 @Sharable
 public class WebSocketTransport extends BaseTransport {
 
@@ -54,19 +69,22 @@ public class WebSocketTransport extends BaseTransport {
     private final HeartbeatHandler heartbeatHandler;
     private final AuthorizeHandler authorizeHandler;
     private final DisconnectableHub disconnectableHub;
+    private final StoreFactory storeFactory;
+
     private final boolean isSsl;
     protected String path;
 
 
     public WebSocketTransport (String connectPath, boolean isSsl, AckManager ackManager,
             DisconnectableHub disconnectable,
-            AuthorizeHandler authorizeHandler, HeartbeatHandler heartbeatHandler) {
+            AuthorizeHandler authorizeHandler, HeartbeatHandler heartbeatHandler, StoreFactory storeFactory) {
         this.path = connectPath + NAME;
         this.isSsl = isSsl;
         this.authorizeHandler = authorizeHandler;
         this.ackManager = ackManager;
         this.disconnectableHub = disconnectable;
         this.heartbeatHandler = heartbeatHandler;
+        this.storeFactory = storeFactory;
     }
 
     @Override
@@ -138,7 +156,7 @@ public class WebSocketTransport extends BaseTransport {
             f.addListener(new ChannelFutureListener() {
                 @Override
                 public void operationComplete (ChannelFuture future) throws Exception {
-                    connectClient(channel, sessionId, queryDecoder.parameters());
+                    connectClient(channel, sessionId);
                 }
             });
         } else {
@@ -146,21 +164,27 @@ public class WebSocketTransport extends BaseTransport {
         }
     }
 
-    private void connectClient (Channel channel, UUID sessionId, final Map<String, List<String>> params) {
-        if (!authorizeHandler.isSessionAuthorized(sessionId)) {
+
+    private void connectClient (Channel channel, UUID sessionId) {
+        HandshakeData data = authorizeHandler.getHandshakeData(sessionId);
+        if (data == null) {
             log.warn("Unauthorized client with sessionId: {}, from ip: {}. Channel closed!",
                     sessionId, channel.remoteAddress());
             channel.close();
             return;
         }
+
         WebSocketClient client = new WebSocketClient(channel, ackManager, disconnectableHub, sessionId,
-                getTransport(), params);
+                getTransport(), storeFactory, data);
+
 
         channelId2Client.put(channel, client);
         sessionId2Client.put(sessionId, client);
         authorizeHandler.connect(client);
 
         heartbeatHandler.onHeartbeat(client);
+
+        channel.pipeline().remove(SocketIOChannelInitializer.XHR_POLLING_TRANSPORT);
         removeHandler(channel.pipeline());
     }
 
@@ -181,7 +205,8 @@ public class WebSocketTransport extends BaseTransport {
     }
 
     @Override
-    public void onDisconnect (BaseClient client) {
+
+    public void onDisconnect (MainBaseClient client) {
         if (client instanceof WebSocketClient) {
             WebSocketClient webClient = (WebSocketClient) client;
             sessionId2Client.remove(webClient.getSessionId());
