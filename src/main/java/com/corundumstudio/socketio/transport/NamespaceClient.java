@@ -16,11 +16,6 @@
 package com.corundumstudio.socketio.transport;
 
 
-import java.net.SocketAddress;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
-
 import com.corundumstudio.socketio.AckCallback;
 import com.corundumstudio.socketio.HandshakeData;
 import com.corundumstudio.socketio.SocketIOClient;
@@ -32,7 +27,6 @@ import com.corundumstudio.socketio.parser.PacketType;
 import java.net.SocketAddress;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class NamespaceClient implements SocketIOClient {
@@ -42,7 +36,6 @@ public class NamespaceClient implements SocketIOClient {
 
 
     public NamespaceClient (MainBaseClient baseClient, Namespace namespace) {
-
         this.baseClient = baseClient;
         this.namespace = namespace;
         namespace.addClient(this);

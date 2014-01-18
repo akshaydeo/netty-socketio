@@ -34,16 +34,14 @@ public class FlashPolicyHandler extends ChannelInboundHandlerAdapter {
 
     private final ByteBuf requestBuffer = Unpooled.copiedBuffer("<policy-file-request/>", CharsetUtil.UTF_8);
 
-    private final ByteBuf responseBuffer = Unpooled.copiedBuffer(
-            "<?xml version=\"1.0\"?>"
-                    + "<!DOCTYPE cross-domain-policy SYSTEM 'http://www.macromedia" +
-                    ".com/xml/dtds/cross-domain-policy.dtd'>\n"
-                    + "<cross-domain-policy>\n"
-                    + "\t<allow-access-from domain=\"*\" to-ports=\"*\" secure=\"false\"/>"
-                    + "\t<allow-access-from domain='d2xclp3ege6hxd.cloudfront.net' to-ports='*' />\n"
-                    + "\t<allow-access-from domain='da1e79qj82tlx.cloudfront.net' to-ports='*' />\n"
-                    + "\t<allow-http-request-headers-from domain=\"*\" headers=\"*\"/>\n"
-                    + "</cross-domain-policy>", CharsetUtil.UTF_8);
+    private final ByteBuf responseBuffer = Unpooled.copiedBuffer(""
+            + "<?xml version=\"1.0\" ?>\n"
+            + "<!DOCTYPE cross-domain-policy SYSTEM 'http://www.macromedia.com/xml/dtds/cross-domain-policy.dtd'>\n"
+            + "<cross-domain-policy>\n"
+            + "    <allow-access-from domain=\"*\" to-ports=\"*\" secure=\"true\"/>"
+            + "    <allow-access-from domain='d2xclp3ege6hxd.cloudfront.net' to-ports='*' />\n"
+            + "    <allow-access-from domain='da1e79qj82tlx.cloudfront.net' to-ports='*' />\n"
+            + "</cross-domain-policy>", CharsetUtil.UTF_8);
 
 
     @Override
