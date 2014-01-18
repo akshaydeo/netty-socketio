@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="43611c17-7345-4d22-92be-103694f0305c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/AuthorizeHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/AuthorizeHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/MainBaseClient.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/MainBaseClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/NamespaceClient.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/NamespaceClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/WebSocketTransport.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/WebSocketTransport.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="43611c17-7345-4d22-92be-103694f0305c" name="Default" comment="" />
     <ignored path="netty-socketio.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390009196803" ignored="false" />
@@ -531,10 +523,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SocketIOServer.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SocketIOServer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="0" selection-start="1041" selection-end="1087" vertical-scroll-proportion="0.23195876">
+            <state line="24" column="0" selection-start="1041" selection-end="1087" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SocketIOChannelInitializer.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="168" column="14" selection-start="7324" selection-end="7423" vertical-scroll-proportion="0.5190039">
               <folding />
             </state>
           </provider>
@@ -553,15 +554,6 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/parser/PacketType.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="19" column="4" selection-start="675" selection-end="675" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Map.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///opt/java/src.zip!/java/util/Map.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="259" column="6" selection-start="12131" selection-end="12131" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -597,10 +589,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOClient.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/WebSocketTransport.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/handler/AuthorizeHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/MainBaseClient.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/NamespaceClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java" />
       </list>
     </option>
   </component>
@@ -1244,13 +1236,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="149" column="55" selection-start="6684" selection-end="6684" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="60" column="5" selection-start="2552" selection-end="2552" vertical-scroll-proportion="0.0">
@@ -1344,7 +1329,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="1041" selection-end="1087" vertical-scroll-proportion="0.23195876">
+        <state line="24" column="0" selection-start="1041" selection-end="1087" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="168" column="14" selection-start="7324" selection-end="7423" vertical-scroll-proportion="0.5190039">
           <folding />
         </state>
       </provider>
