@@ -27,10 +27,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Sharable
-public class FlashPolicyHandler extends ChannelInboundHandlerAdapter {
+public class FlashSocketPolicyHandler extends ChannelInboundHandlerAdapter {
 
 
-    private static final Logger log = LoggerFactory.getLogger(FlashPolicyHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(FlashSocketPolicyHandler.class);
 
     private final ByteBuf requestBuffer = Unpooled.copiedBuffer("<policy-file-request/>", CharsetUtil.UTF_8);
 

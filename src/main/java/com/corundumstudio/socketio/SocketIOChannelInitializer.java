@@ -61,7 +61,8 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
     public static final String HTTP_AGGREGATOR = "aggregator";
     public static final String HTTP_REQUEST_DECODER = "decoder";
     public static final String SSL_HANDLER = "ssl";
-    public static final String FLASH_POLICY_HANDLER = "flashPolicyHandler";
+    public static final String FLASH_SOCKET_POLICY_HANDLER = "flashSocketPolicyHandler";
+    public static final String FLASH_URL_LOADER_POLICY_HANDLER = "flashUrlLoaderPolicyHandler";
     public static final String RESOURCE_HANDLER = "resourceHandler";
     public static final String LOGGING_HANDLER = "logging_handler";
     public static final String WRONG_URL_HANDLER = "wrongUrlBlocker";
@@ -78,9 +79,11 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
     private XHRPollingTransport xhrPollingTransport;
     private WebSocketTransport webSocketTransport;
     private FlashSocketTransport flashSocketTransport;
-    private final FlashPolicyHandler flashPolicyHandler = new FlashPolicyHandler();
+    private final FlashSocketPolicyHandler flashSocketPolicyHandler = new FlashSocketPolicyHandler();
     private ResourceHandler resourceHandler;
     private EncoderHandler encoderHandler;
+    private final FlashUrlLoaderPolicyHandler flashUrlLoaderPolicyHandler =
+            new FlashUrlLoaderPolicyHandler();
 
     private CancelableScheduler scheduler;
 
@@ -151,7 +154,7 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
         boolean isFlashTransport = configuration.getTransports().contains(FlashSocketTransport.NAME);
 
         if (isFlashTransport) {
-            pipeline.addLast(FLASH_POLICY_HANDLER, flashPolicyHandler);
+            pipeline.addLast(FLASH_SOCKET_POLICY_HANDLER, flashSocketPolicyHandler);
         }
 
         if (sslContext != null) {
@@ -165,6 +168,9 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
         pipeline.addLast(HTTP_AGGREGATOR, new HttpObjectAggregator(configuration.getMaxHttpContentLength()));
         pipeline.addLast(HTTP_ENCODER, new HttpResponseEncoder());
         //pipeline.addLast(HTTP_COMPRESSOR, new HttpContentCompressor());
+        if (isFlashTransport) {
+            pipeline.addLast(FLASH_URL_LOADER_POLICY_HANDLER, flashUrlLoaderPolicyHandler);
+        }
 
         if (isFlashTransport) {
             pipeline.addLast(RESOURCE_HANDLER, resourceHandler);
