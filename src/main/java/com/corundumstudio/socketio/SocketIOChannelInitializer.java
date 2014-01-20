@@ -57,6 +57,7 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
     public static final String AUTHORIZE_HANDLER = "authorizeHandler";
     public static final String PACKET_HANDLER = "packetHandler";
     public static final String HTTP_ENCODER = "encoder";
+    public static final String HTTP_COMPRESSOR = "compressor";
     public static final String HTTP_AGGREGATOR = "aggregator";
     public static final String HTTP_REQUEST_DECODER = "decoder";
     public static final String SSL_HANDLER = "ssl";
@@ -163,6 +164,7 @@ public class SocketIOChannelInitializer extends ChannelInitializer<Channel> impl
         pipeline.addLast(HTTP_REQUEST_DECODER, new HttpRequestDecoder());
         pipeline.addLast(HTTP_AGGREGATOR, new HttpObjectAggregator(configuration.getMaxHttpContentLength()));
         pipeline.addLast(HTTP_ENCODER, new HttpResponseEncoder());
+        //pipeline.addLast(HTTP_COMPRESSOR, new HttpContentCompressor());
 
         if (isFlashTransport) {
             pipeline.addLast(RESOURCE_HANDLER, resourceHandler);

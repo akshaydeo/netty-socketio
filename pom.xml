@@ -6,7 +6,7 @@
     <artifactId>netty-socketio</artifactId>
 
     <version>1.6.2-SNAPSHOT</version>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
     <name>NettySocketIO</name>
     <description>Socket.IO server implemented on Java</description>
     <inceptionYear>2012</inceptionYear>

@@ -36,9 +36,10 @@ public class FlashPolicyHandler extends ChannelInboundHandlerAdapter {
 
     private final ByteBuf responseBuffer = Unpooled.copiedBuffer(""
             + "<?xml version=\"1.0\" ?>\n"
-            + "<!DOCTYPE cross-domain-policy SYSTEM 'http://www.macromedia.com/xml/dtds/cross-domain-policy.dtd'>\n"
+            + "<!DOCTYPE cross-domain-policy SYSTEM \"http://www.adobe.com/xml/dtds/cross-domain-policy" +
+            ".dtd\">\n"
             + "<cross-domain-policy>\n"
-            + "    <allow-access-from domain=\"*\" to-ports=\"*\" secure=\"true\"/>"
+            + "    <allow-access-from domain=\"*\" to-ports=\"*\" secure=\"false\"/>"
             + "    <allow-access-from domain='d2xclp3ege6hxd.cloudfront.net' to-ports='*' />\n"
             + "    <allow-access-from domain='da1e79qj82tlx.cloudfront.net' to-ports='*' />\n"
             + "</cross-domain-policy>", CharsetUtil.UTF_8);
