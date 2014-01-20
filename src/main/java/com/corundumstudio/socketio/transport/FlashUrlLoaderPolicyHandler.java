@@ -73,10 +73,10 @@ public final class FlashUrlLoaderPolicyHandler extends ChannelInboundHandlerAdap
             final HttpRequest request = (HttpRequest) msg;
             if (request.getUri().contains("crossdomain.xml")) {
                 writeCrossdomainDotXml(ctx, request);
-                log.trace("policy request");
+                ctx.pipeline().remove(this);
+                return;
             }
             ctx.pipeline().remove(this);
-            return;
         }
         ctx.fireChannelRead(msg);
     }

@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43611c17-7345-4d22-92be-103694f0305c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashUrlLoaderPolicyHandler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashPolicyHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashSocketPolicyHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/SocketIOChannelInitializer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashUrlLoaderPolicyHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashUrlLoaderPolicyHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="netty-socketio.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390150114790" ignored="false" />
+    <file path="/Dummy.txt" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390221677964" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/display_manager_sessions/DisplayManagerComponentSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390064369153" ignored="false" />
     <file path="/DisplayManagerComponentSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389902704932" ignored="false" />
     <file path="/SocketIOChannelInitializer.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390179221918" ignored="false" />
@@ -30,8 +28,8 @@
     <file path="/pom.xml" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390011308764" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-simulator/src/main/java/com/appsurfer/node/v3/simulator/SocketIOSimulatedSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385744554207" ignored="false" />
     <file path="/SocketIOSimulatedSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385744529676" ignored="false" />
-    <file path="/SocketIoTransportServerTest.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390179645239" ignored="false" />
-    <file path="$PROJECT_DIR$/../transporter/socketio/src/test/java/com/rc/transporter/socketio/SocketIoTransportServerTest.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390179673731" ignored="false" />
+    <file path="/SocketIoTransportServerTest.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390210729149" ignored="false" />
+    <file path="$PROJECT_DIR$/../transporter/socketio/src/test/java/com/rc/transporter/socketio/SocketIoTransportServerTest.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390210774192" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/components/AppSurferDynamicClassLoader.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385748510087" ignored="false" />
     <file path="/AppSurferDynamicClassLoader.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1385748281134" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-manager/src/main/java/com/appsurfer/node/v3/manager/Kernel.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1387975521423" ignored="false" />
@@ -159,7 +157,7 @@
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-device-setup-manager/src/main/java/com/appsurfer/node/v3/device_setup_manager/DeviceSetupHandler.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390064369153" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/tasks/SystemResetTask.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1387975521423" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-as-clients/appsurfer-protocol-library/src/main/as/com.appsurfer.client.core/components/Base64.as" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388105881094" ignored="false" />
-    <file path="$PROJECT_DIR$/../transporter/socketio/src/main/java/com/rc/transporter/socketio/SocketIOPipelineFactory.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390002529689" ignored="false" />
+    <file path="$PROJECT_DIR$/../transporter/socketio/src/main/java/com/rc/transporter/socketio/SocketIOPipelineFactory.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390221899950" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/binary.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1387978068932" ignored="false" />
     <file path="$PROJECT_DIR$/../appsurfer-java-node/appsurfer-java-node-core-library/src/main/java/com/appsurfer/node/v3/core/binary/FlashBinaryClientSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1388058564532" ignored="false" />
     <file path="/DynamicNettyTransportSession.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390178614559" ignored="false" />
@@ -418,7 +416,7 @@
     <file path="$MAVEN_REPOSITORY$/com/corundumstudio/socketio/netty-socketio/1.6.2-SNAPSHOT/netty-socketio-1.6.2-SNAPSHOT-sources.jar!/com/corundumstudio/socketio/SocketIOChannelInitializer.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1389997531932" ignored="false" />
     <file path="$MAVEN_REPOSITORY$/com/corundumstudio/socketio/netty-socketio/1.6.1/netty-socketio-1.6.1-sources.jar!/com/corundumstudio/socketio/SocketIOServer.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390009432769" ignored="false" />
     <file path="/UrlLoaderFlashPolicyHandler.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390179329125" ignored="false" />
-    <file path="/FlashUrlLoaderPolicyHandler.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390179041968" ignored="false" />
+    <file path="/FlashUrlLoaderPolicyHandler.java" changelist="43611c17-7345-4d22-92be-103694f0305c" time="1390221823773" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -488,8 +486,9 @@
       <file leaf-file-name="FlashUrlLoaderPolicyHandler.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashUrlLoaderPolicyHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="33" selection-start="595" selection-end="595" vertical-scroll-proportion="0.29177058">
+            <state line="78" column="40" selection-start="3029" selection-end="3029" vertical-scroll-proportion="0.7369077">
               <folding>
+                <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -508,11 +507,8 @@
       <file leaf-file-name="FlashSocketTransport.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashSocketTransport.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="599" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="29" column="13" selection-start="1154" selection-end="1154" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -548,10 +544,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashSocketPolicyHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="28" column="0" selection-start="1041" selection-end="1050" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -656,7 +649,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1036,6 +1028,7 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1050,8 +1043,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -1066,6 +1059,19 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -1094,19 +1100,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1167,7 +1160,6 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31610578" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1185,6 +1177,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31610578" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1247,9 +1240,7 @@
   <component name="editorHistoryManager">
     <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec-http/4.0.14.Final/netty-codec-http-4.0.14.Final-sources.jar!/io/netty/handler/codec/http/HttpContentCompressor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="11" selection-start="1587" selection-end="1587" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="39" column="11" selection-start="1587" selection-end="1587" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/MainBaseClient.java">
@@ -1329,16 +1320,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashSocketTransport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="599" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="18" selection-start="406" selection-end="406" vertical-scroll-proportion="0.0">
@@ -1346,20 +1327,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashSocketTransport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="13" selection-start="1154" selection-end="1154" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashSocketPolicyHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="0" selection-start="1041" selection-end="1050" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/corundumstudio/socketio/transport/FlashUrlLoaderPolicyHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="33" selection-start="595" selection-end="595" vertical-scroll-proportion="0.29177058">
+        <state line="78" column="40" selection-start="3029" selection-end="3029" vertical-scroll-proportion="0.7369077">
           <folding>
+            <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
