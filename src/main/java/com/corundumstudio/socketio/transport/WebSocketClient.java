@@ -21,15 +21,11 @@ import com.corundumstudio.socketio.Transport;
 import com.corundumstudio.socketio.ack.AckManager;
 import com.corundumstudio.socketio.messages.WebSocketPacketMessage;
 import com.corundumstudio.socketio.parser.Packet;
-
+import com.corundumstudio.socketio.store.StoreFactory;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
-
-import com.corundumstudio.socketio.store.StoreFactory;
 
 
 public class WebSocketClient extends MainBaseClient {
@@ -43,7 +39,7 @@ public class WebSocketClient extends MainBaseClient {
     }
 
     public ChannelFuture send (Packet packet) {
-        return getChannel().write(new WebSocketPacketMessage(getSessionId(), packet));
+        return getChannel().writeAndFlush(new WebSocketPacketMessage(getSessionId(), packet));
     }
 
 }

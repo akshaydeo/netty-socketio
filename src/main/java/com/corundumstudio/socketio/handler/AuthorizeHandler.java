@@ -54,13 +54,15 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final CancelableScheduler disconnectScheduler;
-    private final Map<UUID, HandshakeData> authorizedSessionIds = new ConcurrentHashMap<UUID, HandshakeData>();
+    private final Map<UUID, HandshakeData> authorizedSessionIds = new ConcurrentHashMap<UUID,
+            HandshakeData>();
 
     private final String connectPath;
     private final Configuration configuration;
     private final NamespacesHub namespacesHub;
 
-    public AuthorizeHandler(String connectPath, CancelableScheduler scheduler, Configuration configuration, NamespacesHub namespacesHub) {
+    public AuthorizeHandler (String connectPath, CancelableScheduler scheduler,
+            Configuration configuration, NamespacesHub namespacesHub) {
         super();
         this.connectPath = connectPath;
         this.configuration = configuration;
@@ -69,7 +71,7 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead (ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof FullHttpRequest) {
             FullHttpRequest req = (FullHttpRequest) msg;
             Channel channel = ctx.channel();
@@ -80,7 +82,8 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
                 ChannelFuture f = channel.write(res);
                 f.addListener(ChannelFutureListener.CLOSE);
                 req.release();
-                log.warn("Blocked wrong request! url: {}, ip: {}", queryDecoder.path(), channel.remoteAddress());
+                log.warn("Blocked wrong request! url: {}, ip: {}", queryDecoder.path(),
+                        channel.remoteAddress());
                 return;
             }
             if (queryDecoder.path().equals(connectPath)) {
@@ -93,7 +96,8 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
         ctx.fireChannelRead(msg);
     }
 
-    private void authorize(Channel channel, String origin, Map<String, List<String>> params, FullHttpRequest req)
+    private void authorize (Channel channel, String origin, Map<String, List<String>> params,
+            FullHttpRequest req)
             throws IOException {
         Map<String, List<String>> headers = new HashMap<String, List<String>>(req.headers().names().size());
         for (String name : req.headers().names()) {
@@ -102,7 +106,7 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
         }
 
         HandshakeData data = new HandshakeData(headers, params,
-                (InetSocketAddress)channel.remoteAddress(),
+                (InetSocketAddress) channel.remoteAddress(),
                 req.getUri(), origin != null && !origin.equalsIgnoreCase("null"));
 
         boolean result = false;
@@ -139,23 +143,24 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
         }
     }
 
-    private String createHandshake(UUID sessionId) {
+    private String createHandshake (UUID sessionId) {
         String heartbeatTimeoutVal = String.valueOf(configuration.getHeartbeatTimeout());
         if (!configuration.isHeartbeatsEnabled()) {
             heartbeatTimeoutVal = "";
         }
-        String msg = sessionId + ":" + heartbeatTimeoutVal + ":" + configuration.getCloseTimeout() + ":" + configuration.getTransports();
+        String msg = sessionId + ":" + heartbeatTimeoutVal + ":" + configuration.getCloseTimeout() + ":" +
+                configuration.getTransports();
         return msg;
     }
 
-    private void scheduleDisconnect(Channel channel, final UUID sessionId) {
+    private void scheduleDisconnect (Channel channel, final UUID sessionId) {
         channel.closeFuture().addListener(new ChannelFutureListener() {
             @Override
-            public void operationComplete(ChannelFuture future) throws Exception {
+            public void operationComplete (ChannelFuture future) throws Exception {
                 SchedulerKey key = new SchedulerKey(Type.AUTHORIZE, sessionId);
                 disconnectScheduler.schedule(key, new Runnable() {
                     @Override
-                    public void run() {
+                    public void run () {
                         authorizedSessionIds.remove(sessionId);
                         log.debug("Authorized sessionId: {} removed due to connection timeout", sessionId);
                     }
@@ -164,26 +169,27 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
         });
     }
 
-    public HandshakeData getHandshakeData(UUID sessionId) {
+    public HandshakeData getHandshakeData (UUID sessionId) {
         return authorizedSessionIds.get(sessionId);
     }
 
-    public void handshake(UUID sessionId, HandshakeData data) {
+    public void handshake (UUID sessionId, HandshakeData data) {
         authorizedSessionIds.put(sessionId, data);
     }
 
-    public void connect(UUID sessionId) {
+    public void connect (UUID sessionId) {
         SchedulerKey key = new SchedulerKey(Type.AUTHORIZE, sessionId);
         disconnectScheduler.cancel(key);
     }
 
-    public void disconnect(UUID sessionId) {
+    public void disconnect (UUID sessionId) {
         authorizedSessionIds.remove(sessionId);
     }
 
-    public void connect(MainBaseClient client) {
+    public void connect (MainBaseClient client) {
         connect(client.getSessionId());
-        configuration.getStoreFactory().getPubSubStore().publish(PubSubStore.CONNECT, new ConnectMessage(client.getSessionId()));
+        configuration.getStoreFactory().getPubSubStore().publish(PubSubStore.CONNECT,
+                new ConnectMessage(client.getSessionId()));
 
         client.send(new Packet(PacketType.CONNECT));
 
@@ -193,7 +199,7 @@ public class AuthorizeHandler extends ChannelInboundHandlerAdapter implements Di
     }
 
     @Override
-    public void onDisconnect(MainBaseClient client) {
+    public void onDisconnect (MainBaseClient client) {
         disconnect(client.getSessionId());
     }
 

@@ -21,10 +21,7 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.HttpHeaders;
-import io.netty.handler.codec.http.HttpRequest;
-import io.netty.handler.codec.http.HttpResponse;
+import io.netty.handler.codec.http.*;
 import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,9 +67,10 @@ public final class FlashUrlLoaderPolicyHandler extends ChannelInboundHandlerAdap
     @Override
     public void channelRead (final ChannelHandlerContext ctx, final Object msg) throws Exception {
         if (msg instanceof HttpRequest) {
-            final HttpRequest request = (HttpRequest) msg;
+            final FullHttpRequest request = (FullHttpRequest) msg;
             if (request.getUri().contains("crossdomain.xml")) {
                 writeCrossdomainDotXml(ctx, request);
+                request.release();
                 ctx.pipeline().remove(this);
                 return;
             }
